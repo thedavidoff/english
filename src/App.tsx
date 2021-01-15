@@ -31,11 +31,26 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
   },
+  table: {
+    borderCollapse: "inherit",
+  },
   cell: {
+    width: "calc(100%/3)",
+    border: "1px solid #808080",
+    userSelect: "none",
     "&:hover": {
       color: "#fff",
       background: "grey",
       cursor: "pointer",
+    },
+  },
+  disabledCell: {
+    color: "#fff",
+    background: "#c5c5c5",
+    border: "1px solid #c5c5c5",
+    "&:hover": {
+      background: "#c5c5c5",
+      cursor: "inherit"
     },
   },
 });
@@ -56,7 +71,7 @@ const App: React.FC = () => {
     ["Я читаю", "I read"],
     ["Я пишу", "I write"],
   ];
-  let answerOptions = useMemo(
+  let possibleAnswers = useMemo(
     () => [
       [
         "I",
@@ -160,11 +175,14 @@ const App: React.FC = () => {
     ],
     []
   );
-  const [randomNumber, setRandomNumber] = useState<number>(Math.floor(Math.random() * sentences.length));
+  const [randomNumber, setRandomNumber] = useState<number>(
+    Math.floor(Math.random() * sentences.length)
+  );
 
   useEffect(() => {
-    if (status !== null) answerOptions[randomNumber] = shuffle(answerOptions[randomNumber]);
-  }, [status, answerOptions, randomNumber]);
+    if (status !== null)
+      possibleAnswers[randomNumber] = shuffle(possibleAnswers[randomNumber]);
+  }, [status, possibleAnswers, randomNumber]);
 
   const next = (): void => {
     setResult([]);
@@ -174,21 +192,23 @@ const App: React.FC = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLTableCellElement>): void => {
     let innerText: string = e.currentTarget.innerText;
+    let classList: DOMTokenList = e.currentTarget.classList;
+    let classListValue = classList.value;
+    let rightAnswer = sentences[randomNumber][1];
+    if (status !== null || classListValue.indexOf("disabledCell") !== -1) return;
     setResult([...result, innerText]);
-    if (sentences[randomNumber][1] === [...result, innerText].join(" ")) {
+    if (rightAnswer === [...result, innerText].join(" ")) {
       setStatus(true);
-      setTimeout(() => next(),1000);
+      setTimeout(() => next(), 1000);
       return;
     }
-    if (
-      sentences[randomNumber][1].split(" ").length ===
-      [...result, innerText].length
-    ) {
+    if (rightAnswer.split(" ").length === [...result, innerText].length) {
       setStatus(false);
     }
   };
   const handleDelete = (): void => {
     setResult([...result.slice(0, -1)]);
+    setStatus(null);
   };
 
   return (
@@ -200,49 +220,43 @@ const App: React.FC = () => {
         elevation={15}
         style={{ maxWidth: 500 }}
       >
-        <Table>
+        <Table className={classes.table}>
           <TableBody>
             <TableRow>
-              {(answerOptions[randomNumber])
-                .slice(0, 3)
-                .map((option) => (
-                  <TableCell
-                    align="center"
-                    className={classes.cell}
-                    onClick={handleClick}
-                    key={option}
-                  >
-                    {option}
-                  </TableCell>
-                ))}
+              {possibleAnswers[randomNumber].slice(0, 3).map((option) => (
+                <TableCell
+                  key={option}
+                  align="center"
+                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  onClick={handleClick}
+                >
+                  {option}
+                </TableCell>
+              ))}
             </TableRow>
             <TableRow>
-              {(answerOptions[randomNumber])
-                .slice(3, 6)
-                .map((option) => (
-                  <TableCell
-                    align="center"
-                    className={classes.cell}
-                    onClick={handleClick}
-                    key={option}
-                  >
-                    {option}
-                  </TableCell>
-                ))}
+              {possibleAnswers[randomNumber].slice(3, 6).map((option) => (
+                <TableCell
+                  key={option}
+                  align="center"
+                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  onClick={handleClick}
+                >
+                  {option}
+                </TableCell>
+              ))}
             </TableRow>
             <TableRow>
-              {(answerOptions[randomNumber])
-                .slice(6, 9)
-                .map((option) => (
-                  <TableCell
-                    align="center"
-                    className={classes.cell}
-                    onClick={handleClick}
-                    key={option}
-                  >
-                    {option}
-                  </TableCell>
-                ))}
+              {possibleAnswers[randomNumber].slice(6, 9).map((option) => (
+                <TableCell
+                  key={option}
+                  align="center"
+                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  onClick={handleClick}
+                >
+                  {option}
+                </TableCell>
+              ))}
             </TableRow>
           </TableBody>
         </Table>
@@ -250,7 +264,7 @@ const App: React.FC = () => {
       {result.length ? (
         <div onClick={handleDelete}>
           Удалить
-          <Result status={status} />
+          <Result status={status} rightAnswer={sentences[randomNumber][1]} />
         </div>
       ) : null}
     </Container>
