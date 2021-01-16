@@ -6,17 +6,7 @@ type ResultType = {
 };
 
 const Result = ({ status, rightAnswer }: ResultType) => {
-  return (
-    <>
-      <div>{status && "Right"}</div>
-      {status === false ? (
-        <>
-          <div>Правильный ответ:</div>
-          <div>{rightAnswer}</div>
-        </>
-      ) : null}
-    </>
-  );
+  return status === false ? <div>Правильный ответ: <span style={{color: "green"}}><b>{rightAnswer}</b></span></div> : null;
 };
 
 export default Result;

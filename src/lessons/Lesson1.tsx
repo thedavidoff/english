@@ -1,6 +1,6 @@
 import React from "react";
 
-const lesson1 = () => {
+const Lesson1 = () => {
   const subject: string = "Подлежащее + сказуемое (глагол) (1)";
   const formulas: Array<string> = [
     "I + глагол (1.1)",
@@ -8,8 +8,36 @@ const lesson1 = () => {
     "I + глагол + ... (1.3)",
     "I / We / You / They + глагол + ... (1.4)",
   ];
+  const sentencesObj = {
+    0: [
+      {
+        subject: "Подлежащее + сказуемое (глагол) (1)",
+        formulas: [
+          "I + глагол (1.1)",
+          "I / We / You / They + глагол (1.2)",
+          "I + глагол + ... (1.3)",
+          "I / We / You / They + глагол + ... (1.4)",
+        ],
+      },
+      {
+        sentence: "Я вижу",
+        translate: "I see",
+        possibleAnswers: [
+          "I",
+          "see",
+          "understand",
+          "agree",
+          "study",
+          "work",
+          "remember",
+          "read",
+          "write",
+        ],
+      },
+    ],
+  };
   const sentences = {
-    1: [
+    0: [
       ["Я вижу", "I see"],
       ["Я понимаю", "I understand"],
       ["Я знаю", "I know"],
@@ -20,7 +48,7 @@ const lesson1 = () => {
       ["Я читаю", "I read"],
       ["Я пишу", "I write"],
     ],
-    2: [
+    1: [
       ["Мы работаем", "We work"],
       ["Они учатся", "They study"],
       ["Ты понимаешь", "You understand"],
@@ -33,7 +61,7 @@ const lesson1 = () => {
       ["Они пишут", "They write"],
       ["Вы понимаете", "You understand"],
     ],
-    3: [
+    2: [
       ["Я вижу это", "I see it"],
       ["Я понимаю это", "I understand it"],
       ["Я знаю это", "I know it"],
@@ -42,7 +70,7 @@ const lesson1 = () => {
       ["Я здесь учусь", "I study here"],
       ["Я вижу тебя", "I see you"],
     ],
-    4: [
+    3: [
       ["Я понимаю тебя очень хорошо", "I understand you very well"],
       ["Я согласен с тобой", "I agree with you"],
       ["Я знаю это очень хорошо", "I know it very well"],
@@ -66,7 +94,7 @@ const lesson1 = () => {
     ],
   };
 
-  return;
+  return <div>{sentencesObj[0][1].translate}</div>;
 };
 
-export default lesson1;
+export default Lesson1;

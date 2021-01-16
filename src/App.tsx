@@ -9,7 +9,10 @@ import {
   TableRow,
   TableCell,
 } from "@material-ui/core";
+import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Result from "./Result";
+import Lesson1 from "./lessons/Lesson1";
 
 const shuffle = (array: Array<string>) => {
   let currentIndex = array.length,
@@ -31,6 +34,31 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
   },
+  header: {
+    display: "flex",
+  },
+  rightAnswerStats: {
+    width: 100,
+    textAlign: "center",
+    color: "#fff",
+    background: "green",
+  },
+  scoreStats: {
+    width: 100,
+    textAlign: "center",
+    color: "#fff",
+    background: "grey",
+  },
+  wrongAnswerStats: {
+    width: 100,
+    textAlign: "center",
+    color: "#fff",
+    background: "red",
+  },
+  tableContainer: {
+    position: "relative",
+    maxWidth: 480,
+  },
   table: {
     borderCollapse: "inherit",
   },
@@ -50,14 +78,47 @@ const useStyles = makeStyles({
     border: "1px solid #c5c5c5",
     "&:hover": {
       background: "#c5c5c5",
-      cursor: "inherit"
+      cursor: "inherit",
     },
   },
+  status: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    top: 0,
+    background: "rgba(204, 204, 204, .8)",
+    cursor: "pointer",
+  },
+  bigStatusIcon: {
+    fontSize: 100,
+  },
+  smallStatusIcon: {
+    fontSize: 30,
+  },
+  correctStatusIcon: {
+    color: "green",
+  },
+  incorrectStatusIcon: {
+    color: "red",
+  },
+  deleteButton: {
+    cursor: "pointer",
+  },
 });
+
+export interface IStats {
+  right: number;
+  wrong: number;
+  score: number;
+}
 
 const App: React.FC = () => {
   const [result, setResult] = useState<Array<string>>([]);
   const [status, setStatus] = useState<boolean | null>(null);
+  const [stats, setStats] = useState<IStats>({ right: 0, wrong: 0, score: 0 });
   const classes = useStyles();
 
   const sentences: Array<Array<string>> = [
@@ -195,30 +256,78 @@ const App: React.FC = () => {
     let classList: DOMTokenList = e.currentTarget.classList;
     let classListValue = classList.value;
     let rightAnswer = sentences[randomNumber][1];
-    if (status !== null || classListValue.indexOf("disabledCell") !== -1) return;
+    if (status !== null || classListValue.indexOf("disabledCell") !== -1)
+      return;
     setResult([...result, innerText]);
     if (rightAnswer === [...result, innerText].join(" ")) {
       setStatus(true);
+      setStats({
+        ...stats,
+        right: stats.right + 1,
+        score: stats.right + 1 - stats.wrong,
+      });
       setTimeout(() => next(), 1000);
       return;
     }
     if (rightAnswer.split(" ").length === [...result, innerText].length) {
       setStatus(false);
+      setStats({
+        ...stats,
+        wrong: stats.wrong + 1,
+        score: stats.right - 1 - stats.wrong,
+      });
     }
   };
   const handleDelete = (): void => {
     setResult([...result.slice(0, -1)]);
     setStatus(null);
   };
+  const handleClear = (): void => {
+    setResult([]);
+    setStatus(null);
+  };
 
   return (
     <Container className={classes.container}>
+      <div className={classes.header}>
+        <div className={classes.rightAnswerStats}>
+          Right
+          <br />
+          {stats.right}
+        </div>
+        <div className={classes.scoreStats}>
+          Score
+          <br />
+          {stats.score}
+        </div>
+        <div className={classes.wrongAnswerStats}>
+          Wrong
+          <br />
+          {stats.wrong}
+        </div>
+      </div>
       <div style={{ marginBottom: 50 }}>{sentences[randomNumber][0]}</div>
-      <div style={{ marginBottom: 50 }}>{result.join(" ")}</div>
+      <div style={{ height: 33, marginBottom: 50, fontSize: 25 }}>
+        {result.join(" ")}
+      </div>
+      <div style={{ height: 34 }}>
+        {result.length ? (
+          <>
+            <div className={classes.deleteButton} onClick={handleDelete}>
+              {status === null ? (
+                <HighlightOffIcon
+                  className={`${classes.smallStatusIcon} ${classes.incorrectStatusIcon}`}
+                />
+              ) : null}
+            </div>
+            <Result status={status} rightAnswer={sentences[randomNumber][1]} />
+          </>
+        ) : null}
+      </div>
       <TableContainer
         component={Paper}
         elevation={15}
-        style={{ maxWidth: 500 }}
+        className={classes.tableContainer}
       >
         <Table className={classes.table}>
           <TableBody>
@@ -227,7 +336,9 @@ const App: React.FC = () => {
                 <TableCell
                   key={option}
                   align="center"
-                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  className={`${classes.cell} ${
+                    result.includes(option) ? classes.disabledCell : ""
+                  }`}
                   onClick={handleClick}
                 >
                   {option}
@@ -239,7 +350,9 @@ const App: React.FC = () => {
                 <TableCell
                   key={option}
                   align="center"
-                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  className={`${classes.cell} ${
+                    result.includes(option) ? classes.disabledCell : ""
+                  }`}
                   onClick={handleClick}
                 >
                   {option}
@@ -251,7 +364,9 @@ const App: React.FC = () => {
                 <TableCell
                   key={option}
                   align="center"
-                  className={`${classes.cell} ${result.includes(option) ? classes.disabledCell : ''}`}
+                  className={`${classes.cell} ${
+                    result.includes(option) ? classes.disabledCell : ""
+                  }`}
                   onClick={handleClick}
                 >
                   {option}
@@ -260,13 +375,24 @@ const App: React.FC = () => {
             </TableRow>
           </TableBody>
         </Table>
+        {status !== null ? (
+          <div
+            className={classes.status}
+            onClick={!status ? handleClear : () => {}}
+          >
+            {status ? (
+              <CheckCircleOutlineOutlinedIcon
+                className={`${classes.bigStatusIcon} ${classes.correctStatusIcon}`}
+              />
+            ) : (
+              <HighlightOffIcon
+                className={`${classes.bigStatusIcon} ${classes.incorrectStatusIcon}`}
+              />
+            )}
+          </div>
+        ) : null}
       </TableContainer>
-      {result.length ? (
-        <div onClick={handleDelete}>
-          Удалить
-          <Result status={status} rightAnswer={sentences[randomNumber][1]} />
-        </div>
-      ) : null}
+      <Lesson1 />
     </Container>
   );
 };
