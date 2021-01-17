@@ -1,9 +1,8 @@
 import React from "react";
 
 const Lesson1 = () => {
-  const subject: string = "Подлежащее + сказуемое (глагол) (1)";
   const formulas: Array<string> = [
-    "I + глагол (1.1)",
+    "Подлежащее + сказуемое (глагол) (I + глагол) (1.1)",
     "I / We / You / They + глагол (1.2)",
     "I + глагол + ... (1.3)",
     "I / We / You / They + глагол + ... (1.4)",
