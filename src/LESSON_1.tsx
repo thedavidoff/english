@@ -14,7 +14,7 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Result from "./Result";
 import Lesson1 from "./lessons/Lesson1";
 
-const shuffle = (array: Array<string>) => {
+const shuffle = (array: Array<string>): Array<string> => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     marginBottom: 50,
   },
-  rightAnswerStats: {
+  statsOfCorrectAnswers: {
     width: 100,
     textAlign: "center",
     color: "#fff",
@@ -54,7 +54,7 @@ const useStyles = makeStyles({
     color: "#fff",
     background: "rgba(128, 128, 128, .7)",
   },
-  wrongAnswerStats: {
+  statsOfWrongAnswers: {
     width: 100,
     textAlign: "center",
     color: "#fff",
@@ -79,7 +79,7 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
-  disabledCell: {
+  selectedCell: {
     color: "#fff",
     background: "#c5c5c5",
     border: "1px solid #c5c5c5",
@@ -88,16 +88,16 @@ const useStyles = makeStyles({
       cursor: "inherit",
     },
   },
-  borderTopLeftRadiusCell: {
+  topLeftCellRadius: {
     borderTopLeftRadius: 4,
   },
-  borderTopRightRadiusCell: {
+  topRightCellRadius: {
     borderTopRightRadius: 4,
   },
-  borderBottomLeftRadiusCell: {
+  bottomLeftCellRadius: {
     borderBottomLeftRadius: 4
   },
-  borderBottomRightRadiusCell: {
+  bottomRightCellRadius: {
     borderBottomRightRadius: 4
   },
   status: {
@@ -117,10 +117,10 @@ const useStyles = makeStyles({
   smallStatusIcon: {
     fontSize: 30,
   },
-  correctStatusIcon: {
+  iconOfCorrectStatus: {
     color: "green",
   },
-  incorrectStatusIcon: {
+  iconOfWrongStatus: {
     color: "red",
   },
   deleteButton: {
@@ -128,8 +128,8 @@ const useStyles = makeStyles({
   },
 });
 
-export interface IStats {
-  right: number;
+interface IStats {
+  correct: number;
   wrong: number;
   score: number;
 }
@@ -137,7 +137,7 @@ export interface IStats {
 const LESSON_1: React.FC = () => {
   const [result, setResult] = useState<Array<string>>([]);
   const [status, setStatus] = useState<boolean | null>(null);
-  const [stats, setStats] = useState<IStats>({ right: 0, wrong: 0, score: 0 });
+  const [stats, setStats] = useState<IStats>({ correct: 0, wrong: 0, score: 0 });
   const classes = useStyles();
 
   const sentences: Array<Array<string>> = [
@@ -282,8 +282,8 @@ const LESSON_1: React.FC = () => {
       setStatus(true);
       setStats({
         ...stats,
-        right: stats.right + 1,
-        score: stats.right + 1 - stats.wrong,
+        correct: stats.correct + 1,
+        score: stats.correct + 1 - stats.wrong,
       });
       setTimeout(() => next(), 1000);
       return;
@@ -293,7 +293,7 @@ const LESSON_1: React.FC = () => {
       setStats({
         ...stats,
         wrong: stats.wrong + 1,
-        score: stats.right - 1 - stats.wrong,
+        score: stats.correct - 1 - stats.wrong,
       });
     }
   };
@@ -309,17 +309,17 @@ const LESSON_1: React.FC = () => {
   return (
     <Container className={classes.container}>
       <div className={classes.header}>
-        <Paper elevation={15} className={classes.rightAnswerStats}>
-          Right
+        <Paper elevation={15} className={classes.statsOfCorrectAnswers}>
+          Correct
           <br />
-          {stats.right}
+          {stats.correct}
         </Paper>
         <Paper elevation={15} className={classes.scoreStats}>
           Score
           <br />
           {stats.score}
         </Paper>
-        <Paper elevation={15} className={classes.wrongAnswerStats}>
+        <Paper elevation={15} className={classes.statsOfWrongAnswers}>
           Wrong
           <br />
           {stats.wrong}
@@ -335,7 +335,7 @@ const LESSON_1: React.FC = () => {
             <div className={classes.deleteButton} onClick={handleDelete}>
               {status === null ? (
                 <HighlightOffIcon
-                  className={`${classes.smallStatusIcon} ${classes.incorrectStatusIcon}`}
+                  className={`${classes.smallStatusIcon} ${classes.iconOfWrongStatus}`}
                 />
               ) : null}
             </div>
@@ -358,9 +358,9 @@ const LESSON_1: React.FC = () => {
                     key={option}
                     align="center"
                     className={`${classes.cell} ${
-                      result.includes(option) ? classes.disabledCell : ""
-                    } ${index === 0 ? classes.borderTopLeftRadiusCell : ""}
-                    ${index === 2 ? classes.borderTopRightRadiusCell : ""}`}
+                      result.includes(option) ? classes.selectedCell : ""
+                    } ${index === 0 ? classes.topLeftCellRadius : ""}
+                    ${index === 2 ? classes.topRightCellRadius : ""}`}
                     onClick={handleClick}
                   >
                     {option}
@@ -373,7 +373,7 @@ const LESSON_1: React.FC = () => {
                   key={option}
                   align="center"
                   className={`${classes.cell} ${
-                    result.includes(option) ? classes.disabledCell : ""
+                    result.includes(option) ? classes.selectedCell : ""
                   }`}
                   onClick={handleClick}
                 >
@@ -387,8 +387,8 @@ const LESSON_1: React.FC = () => {
                   key={option}
                   align="center"
                   className={`${classes.cell} ${
-                    result.includes(option) ? classes.disabledCell : ""
-                  } ${index === 0 ? classes.borderBottomLeftRadiusCell : ""} ${index === 2 ? classes.borderBottomRightRadiusCell : ""}`}
+                    result.includes(option) ? classes.selectedCell : ""
+                  } ${index === 0 ? classes.bottomLeftCellRadius : ""} ${index === 2 ? classes.bottomRightCellRadius : ""}`}
                   onClick={handleClick}
                 >
                   {option}
@@ -404,11 +404,11 @@ const LESSON_1: React.FC = () => {
           >
             {status ? (
               <CheckCircleOutlineOutlinedIcon
-                className={`${classes.bigStatusIcon} ${classes.correctStatusIcon}`}
+                className={`${classes.bigStatusIcon} ${classes.iconOfCorrectStatus}`}
               />
             ) : (
               <HighlightOffIcon
-                className={`${classes.bigStatusIcon} ${classes.incorrectStatusIcon}`}
+                className={`${classes.bigStatusIcon} ${classes.iconOfWrongStatus}`}
               />
             )}
           </div>
