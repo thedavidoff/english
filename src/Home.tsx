@@ -44,6 +44,7 @@ const useStyles = makeStyles({
 
 const Home: React.FC = () => {
   const classes = useStyles();
+  const lessonNumbers: Array<string> = ["1-2", "3-4"];
 
   return (
     <Container className={classes.container}>
@@ -54,16 +55,15 @@ const Home: React.FC = () => {
       >
         <Table className={classes.tableOfLinks}>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                <NavLink to="/1">Урок 1 (1-2)</NavLink>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <NavLink to="/2">Урок 2 (3-4)</NavLink>
-              </TableCell>
-            </TableRow>
+            {lessonNumbers.map((lesson, index) => (
+              <TableRow key={index}>
+                <TableCell>
+                  <NavLink to={`/${index + 1}`}>{`Урок ${
+                    index + 1
+                  } (${lesson})`}</NavLink>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

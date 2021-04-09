@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Home from "./Home";
-import LESSON_1 from "./LESSON_1";
+import Lesson from "./Lesson";
 
 const Routes = () => {
   return (
     <Switch>
       <Route exact path="/" render={() => <Home />} />
-      <Route exact path="/1" render={() => <LESSON_1 />} />
+      <Route exact path="/:id" render={() => <Lesson />} />
     </Switch>
   );
 };

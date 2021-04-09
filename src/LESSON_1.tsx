@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import {
   makeStyles,
   Container,
@@ -13,27 +13,14 @@ import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlin
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Result from "./Result";
 import Lesson1 from "./lessons/Lesson1";
-
-const shuffle = (array: Array<string>): Array<string> => {
-  let currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-};
+import {log} from "util";
 
 const useStyles = makeStyles({
   container: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: 16
+    padding: 16,
   },
   header: {
     display: "flex",
@@ -95,10 +82,10 @@ const useStyles = makeStyles({
     borderTopRightRadius: 4,
   },
   bottomLeftCellRadius: {
-    borderBottomLeftRadius: 4
+    borderBottomLeftRadius: 4,
   },
   bottomRightCellRadius: {
-    borderBottomRightRadius: 4
+    borderBottomRightRadius: 4,
   },
   status: {
     display: "flex",
@@ -133,141 +120,65 @@ interface IStats {
   wrong: number;
   score: number;
 }
+interface ISentences {
+  sentence: Array<string>;
+}
 
 const LESSON_1: React.FC = () => {
-  const [result, setResult] = useState<Array<string>>([]);
-  const [status, setStatus] = useState<boolean | null>(null);
-  const [stats, setStats] = useState<IStats>({ correct: 0, wrong: 0, score: 0 });
-  const classes = useStyles();
-
-  const sentences: Array<Array<string>> = [
-    ["Я вижу", "I see"],
-    ["Я понимаю", "I understand"],
-    ["Я знаю", "I know"],
-    ["Я согласен", "I agree"],
-    ["Я учусь", "I study"],
-    ["Я работаю", "I work"],
-    ["Я помню", "I remember"],
-    ["Я читаю", "I read"],
-    ["Я пишу", "I write"],
-  ];
-  let possibleAnswers = useMemo(
-    () => [
-      [
-        "I",
-        "see",
-        "understand",
-        "agree",
-        "study",
-        "work",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "know",
-        "agree",
-        "study",
-        "work",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "know",
-        "agree",
-        "study",
-        "work",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "know",
-        "agree",
-        "study",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "know",
-        "study",
-        "work",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "agree",
-        "study",
-        "work",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "know",
-        "agree",
-        "study",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "know",
-        "agree",
-        "study",
-        "work",
-        "remember",
-        "read",
-        "write",
-      ],
-      [
-        "I",
-        "see",
-        "understand",
-        "know",
-        "agree",
-        "study",
-        "work",
-        "read",
-        "write",
-      ],
-    ],
+  const [sentences, setSentences] = React.useState<Array<string>>([]);
+  const [possibleAnswers, setPossibleAnswers] = React.useState<Array<string>>(
     []
   );
-  const [randomNumber, setRandomNumber] = useState<number>(
-    Math.floor(Math.random() * sentences.length)
-  );
 
-  useEffect(() => {
-    if (status !== null)
-      possibleAnswers[randomNumber] = shuffle(possibleAnswers[randomNumber]);
-  }, [status, possibleAnswers, randomNumber]);
+  const [result, setResult] = React.useState<Array<string>>([]);
+  const [status, setStatus] = React.useState<boolean | null>(null);
+  const [stats, setStats] = React.useState<IStats>({
+    correct: 0,
+    wrong: 0,
+    score: 0,
+  });
+  const classes = useStyles();
+  let task: string = "";
+  let answer: string = "";
+
+  React.useEffect(() => {
+    (async () => {
+      await fetch("http://localhost:3001/lessons")
+        .then(res => res.json())
+        .then(data => {
+          setSentences(
+            data.map((i: { sentences: ISentences }) => {
+              return Object.values(i.sentences)
+            }
+            )
+          );
+          setPossibleAnswers(
+            data.map((i: { sentences: ISentences }) =>
+              Object.values(i.sentences).map((y) => y.possibleAnswers)
+            )
+          );
+        });
+    })();
+  }, []);
+  const random = Math.floor(Math.random() * sentences.length);
+  const [randomNumber, setRandomNumber] = React.useState<number>(random);
+  console.log(sentences);
+  console.log(possibleAnswers);
+
+  if (sentences.length) {
+    task = sentences[randomNumber][0];
+    answer = sentences[randomNumber][1];
+  }
+
+  // React.useEffect(() => {
+  //   if (status !== null)
+  //     possibleAnswers[randomNumber] = shuffle(possibleAnswers[randomNumber]);
+  // }, [status, possibleAnswers, randomNumber]);
 
   const next = (): void => {
     setResult([]);
     setStatus(null);
-    setRandomNumber(Math.floor(Math.random() * sentences.length));
+    setRandomNumber(random);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLTableCellElement>): void => {
@@ -325,7 +236,7 @@ const LESSON_1: React.FC = () => {
           {stats.wrong}
         </Paper>
       </div>
-      <div style={{ marginBottom: 50 }}>{sentences[randomNumber][0]}</div>
+      <div style={{ marginBottom: 50 }}>{task}</div>
       <div style={{ height: 33, marginBottom: 50, fontSize: 25 }}>
         {result.join(" ")}
       </div>
@@ -339,81 +250,89 @@ const LESSON_1: React.FC = () => {
                 />
               ) : null}
             </div>
-            <Result status={status} rightAnswer={sentences[randomNumber][1]} />
+            <Result status={status} rightAnswer={answer} />
           </>
         ) : null}
       </div>
-      <TableContainer
-        component={Paper}
-        elevation={15}
-        className={classes.tableContainer}
-      >
-        <Table className={classes.table}>
-          <TableBody>
-            <TableRow>
-              {possibleAnswers[randomNumber]
-                .slice(0, 3)
-                .map((option, index) => (
-                  <TableCell
-                    key={option}
-                    align="center"
-                    className={`${classes.cell} ${
-                      result.includes(option) ? classes.selectedCell : ""
-                    } ${index === 0 ? classes.topLeftCellRadius : ""}
-                    ${index === 2 ? classes.topRightCellRadius : ""}`}
-                    onClick={handleClick}
-                  >
-                    {option}
-                  </TableCell>
-                ))}
-            </TableRow>
-            <TableRow>
-              {possibleAnswers[randomNumber].slice(3, 6).map((option) => (
-                <TableCell
-                  key={option}
-                  align="center"
-                  className={`${classes.cell} ${
-                    result.includes(option) ? classes.selectedCell : ""
-                  }`}
-                  onClick={handleClick}
-                >
-                  {option}
-                </TableCell>
-              ))}
-            </TableRow>
-            <TableRow>
-              {possibleAnswers[randomNumber].slice(6, 9).map((option, index) => (
-                <TableCell
-                  key={option}
-                  align="center"
-                  className={`${classes.cell} ${
-                    result.includes(option) ? classes.selectedCell : ""
-                  } ${index === 0 ? classes.bottomLeftCellRadius : ""} ${index === 2 ? classes.bottomRightCellRadius : ""}`}
-                  onClick={handleClick}
-                >
-                  {option}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableBody>
-        </Table>
-        {status !== null ? (
-          <div
-            className={classes.status}
-            onClick={!status ? handleClear : () => {}}
-          >
-            {status ? (
-              <CheckCircleOutlineOutlinedIcon
-                className={`${classes.bigStatusIcon} ${classes.iconOfCorrectStatus}`}
-              />
-            ) : (
-              <HighlightOffIcon
-                className={`${classes.bigStatusIcon} ${classes.iconOfWrongStatus}`}
-              />
-            )}
-          </div>
-        ) : null}
-      </TableContainer>
+      {/*<TableContainer*/}
+      {/*  component={Paper}*/}
+      {/*  elevation={15}*/}
+      {/*  className={classes.tableContainer}*/}
+      {/*>*/}
+      {/*  <Table className={classes.table}>*/}
+      {/*    <TableBody>*/}
+      {/*      {possibleAnswers.length ? (*/}
+      {/*        <>*/}
+      {/*          <TableRow>*/}
+      {/*            {possibleAnswers[randomNumber]*/}
+      {/*              .slice(0, 3)*/}
+      {/*              .map((option, index) => (*/}
+      {/*                <TableCell*/}
+      {/*                  key={option}*/}
+      {/*                  align="center"*/}
+      {/*                  className={`${classes.cell} ${*/}
+      {/*                    result.includes(option) ? classes.selectedCell : ""*/}
+      {/*                  } ${index === 0 ? classes.topLeftCellRadius : ""}*/}
+      {/*              ${index === 2 ? classes.topRightCellRadius : ""}`}*/}
+      {/*                  onClick={handleClick}*/}
+      {/*                >*/}
+      {/*                  {option}*/}
+      {/*                </TableCell>*/}
+      {/*              ))}*/}
+      {/*          </TableRow>*/}
+      {/*          <TableRow>*/}
+      {/*            {possibleAnswers[randomNumber].slice(3, 6).map((option) => (*/}
+      {/*              <TableCell*/}
+      {/*                key={option}*/}
+      {/*                align="center"*/}
+      {/*                className={`${classes.cell} ${*/}
+      {/*                  result.includes(option) ? classes.selectedCell : ""*/}
+      {/*                }`}*/}
+      {/*                onClick={handleClick}*/}
+      {/*              >*/}
+      {/*                {option}*/}
+      {/*              </TableCell>*/}
+      {/*            ))}*/}
+      {/*          </TableRow>*/}
+      {/*          <TableRow>*/}
+      {/*            {possibleAnswers[randomNumber]*/}
+      {/*              .slice(6, 9)*/}
+      {/*              .map((option, index) => (*/}
+      {/*                <TableCell*/}
+      {/*                  key={option}*/}
+      {/*                  align="center"*/}
+      {/*                  className={`${classes.cell} ${*/}
+      {/*                    result.includes(option) ? classes.selectedCell : ""*/}
+      {/*                  } ${index === 0 ? classes.bottomLeftCellRadius : ""} ${*/}
+      {/*                    index === 2 ? classes.bottomRightCellRadius : ""*/}
+      {/*                  }`}*/}
+      {/*                  onClick={handleClick}*/}
+      {/*                >*/}
+      {/*                  {option}*/}
+      {/*                </TableCell>*/}
+      {/*              ))}*/}
+      {/*          </TableRow>*/}
+      {/*        </>*/}
+      {/*      ) : null}*/}
+      {/*    </TableBody>*/}
+      {/*  </Table>*/}
+      {/*  {status !== null ? (*/}
+      {/*    <div*/}
+      {/*      className={classes.status}*/}
+      {/*      onClick={!status ? handleClear : () => {}}*/}
+      {/*    >*/}
+      {/*      {status ? (*/}
+      {/*        <CheckCircleOutlineOutlinedIcon*/}
+      {/*          className={`${classes.bigStatusIcon} ${classes.iconOfCorrectStatus}`}*/}
+      {/*        />*/}
+      {/*      ) : (*/}
+      {/*        <HighlightOffIcon*/}
+      {/*          className={`${classes.bigStatusIcon} ${classes.iconOfWrongStatus}`}*/}
+      {/*        />*/}
+      {/*      )}*/}
+      {/*    </div>*/}
+      {/*  ) : null}*/}
+      {/*</TableContainer>*/}
       <Lesson1 />
     </Container>
   );

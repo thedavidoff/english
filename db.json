@@ -1,0 +1,111 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "sentences": [
+        {
+          "sentence": ["Я вижу", "I see"],
+          "possibleAnswers": ["I", "see", "understand", "agree", "study", "work", "remember", "read", "write"]
+        },
+        {
+          "sentence": ["Я понимаю", "I understand"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "work", "read", "write"]
+        },
+        {
+          "sentence": ["Я знаю", "I know"],
+          "possibleAnswers": ["I", "see", "know", "agree", "study", "work", "remember", "read", "write"]
+        },
+        {
+          "sentence": ["Я согласен", "I agree"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "write"]
+        },
+        {
+          "sentence": ["Я учусь", "I study"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "write"]
+        },
+        {
+          "sentence": ["Я работаю", "I work"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "work"]
+        },
+        {
+          "sentence": ["Я помню", "I remember"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "work"]
+        },
+        {
+          "sentence": ["Я читаю", "I read"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "work"]
+        },
+        {
+          "sentence": ["Я пишу", "I write"],
+          "possibleAnswers": ["I", "see", "understand", "know", "agree", "study", "remember", "read", "write"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sentences": [
+        {
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sentences": [
+        {
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        },{
+          "sentence": ["asdasd", "asdasd"],
+          "possibleAnswers": ["asdasd", "sada", "dfgdfg", "agree", "dfgdf", "dfg", "dfg", "dfg", "wer"]
+        }
+      ]
+    }
+  ]
+}
