@@ -10,11 +10,11 @@ import {
 } from "@material-ui/core";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { Transition } from "react-transition-group";
 import Result from "./Result";
 import { shuffle } from "./utils";
 import { IStats, ISentences, IPossibleAnswers } from "./interfaces";
 import PossibleAnswersBlock from "./PossibleAnswersBlock";
+import Header from "./Header";
 
 const useStyles = makeStyles({
   container: {
@@ -22,31 +22,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     padding: 16,
-  },
-  header: {
-    display: "flex",
-    width: "100%",
-    maxWidth: 480,
-    justifyContent: "space-between",
-    marginBottom: 50,
-  },
-  statsOfCorrectAnswers: {
-    width: 100,
-    textAlign: "center",
-    color: "#fff",
-    background: "rgba(0, 128, 0, .7)",
-  },
-  scoreStats: {
-    width: 100,
-    textAlign: "center",
-    color: "#fff",
-    background: "rgba(128, 128, 128, .7)",
-  },
-  statsOfWrongAnswers: {
-    width: 100,
-    textAlign: "center",
-    color: "#fff",
-    background: "rgba(255, 0, 0, .7)",
   },
   task: {
     marginBottom: 50,
@@ -93,10 +68,13 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
 });
+const ids: Array<string> = [];
 
 const Lesson: React.FC = () => {
-  const [sentences, setSentences] = React.useState<Array<string>>([]);
-  const [possibleAnswers, setPossibleAnswers] = React.useState<Array<any>>([]);
+  const [sentences, setSentences] = React.useState<Array<string | []>>([]);
+  const [possibleAnswers, setPossibleAnswers] = React.useState<
+    Array<Array<string>>
+  >([]);
   const [random, setRandom] = React.useState<number>(0);
   const [result, setResult] = React.useState<Array<string>>([]);
   const [status, setStatus] = React.useState<null | boolean>(null);
@@ -106,22 +84,22 @@ const Lesson: React.FC = () => {
     score: 0,
   });
 
-  let { id: lessonPath }: { id: string } = useParams();
+  const { id: lessonPath }: { id: string } = useParams();
   const classes = useStyles();
   let task: string = "";
   let answer: string = "";
-  const correctRef = React.useRef(null);
-  const wrongRef = React.useRef(null);
 
   React.useEffect(() => {
     (async () => {
       await fetch(`http://localhost:3001/lessons/${lessonPath}`)
         .then((res) => res.json())
         .then((json) => {
+          console.log(json.sentences.length);
+
           setSentences(
             json.sentences.map((i: ISentences) => Object.values(i.sentence))
           );
-          let result: Array<Array<string> | undefined> = [];
+          let result: Array<Array<string>> = [];
           json.sentences.map((i: IPossibleAnswers) => {
             return result.push(shuffle(Object.values(i.possibleAnswers)));
           });
@@ -134,99 +112,97 @@ const Lesson: React.FC = () => {
 
   if (possibleAnswers.length) {
     task = sentences[random][0];
-    answer = sentences[random][1];
+    if (Array.isArray(sentences[random][1])) {
+      answer = `${sentences[random][1][0]
+        .toString()
+        .replaceAll(",", "/")} | ${sentences[random][1][1]
+        .toString()
+        .replaceAll(",", "/")}`;
+    } else {
+      answer = sentences[random][1];
+    }
   }
 
-  const next = (): void => {
-    setRandom(Math.floor(Math.random() * sentences.length));
-    setResult([]);
-    setStatus(null);
-  };
-  const handleClick = (e: React.MouseEvent<HTMLTableCellElement>): void => {
-    let innerText: string = e.currentTarget.innerText;
-    let classList: DOMTokenList = e.currentTarget.classList;
-    let classListValue = classList.value;
-    let rightAnswer = sentences[random][1];
-    if (status !== null || classListValue.indexOf("selectedCell") !== -1)
-      return;
+  const handleClick = React.useCallback(
+    (e: React.MouseEvent<HTMLTableCellElement>): void => {
+      let id = e.currentTarget.id;
+      let innerText: string = e.currentTarget.innerText;
+      let classList: DOMTokenList = e.currentTarget.classList;
+      let classListValue = classList.value;
+      let correctAnswer = sentences[random][1];
+      if (status !== null || classListValue.indexOf("selectedCell") !== -1)
+        return;
 
-    setResult([...result, innerText]);
-    if (rightAnswer === [...result, innerText].join(" ")) {
-      setStatus(true);
-      setStats({
-        ...stats,
-        correct: stats.correct + 1,
-        score: stats.correct + 1 - stats.wrong,
-      });
-      setTimeout(() => next(), 1000);
-      return;
-    }
-    if (rightAnswer.split(" ").length === [...result, innerText].length) {
-      setStatus(false);
-      setStats({
-        ...stats,
-        wrong: stats.wrong + 1,
-        score: stats.correct - 1 - stats.wrong,
-      });
-    }
-  };
+      setResult([...result, innerText]);
+      ids.push(id);
+      const next = (): void => {
+        setRandom(Math.floor(Math.random() * sentences.length));
+        setResult([]);
+        ids.length = 0;
+        setStatus(null);
+      };
+
+      if (Array.isArray(correctAnswer)) {
+        // When there are several correct answers.
+        if (
+          correctAnswer[0].includes(result[0]) &&
+          correctAnswer[1].includes(innerText)
+        ) {
+          setStatus(true);
+          setStats({
+            ...stats,
+            correct: stats.correct + 1,
+            score: stats.correct + 1 - stats.wrong,
+          });
+          setTimeout(() => next(), 1000);
+          return;
+        }
+        if (correctAnswer.length === [...result, innerText].length) {
+          setStatus(false);
+          setStats({
+            ...stats,
+            wrong: stats.wrong + 1,
+            score: stats.correct - 1 - stats.wrong,
+          });
+          return;
+        }
+        return;
+      }
+      if (correctAnswer === [...result, innerText].join(" ")) {
+        // When there are one correct answer.
+        setStatus(true);
+        setStats({
+          ...stats,
+          correct: stats.correct + 1,
+          score: stats.correct + 1 - stats.wrong,
+        });
+        setTimeout(() => next(), 1000);
+        return;
+      }
+      if (correctAnswer.split(" ").length === [...result, innerText].length) {
+        setStatus(false);
+        setStats({
+          ...stats,
+          wrong: stats.wrong + 1,
+          score: stats.correct - 1 - stats.wrong,
+        });
+      }
+    },
+    [random, result, sentences, stats, status]
+  );
   const handleDelete = (): void => {
     setResult([...result.slice(0, -1)]);
+    ids.length = ids.length - 1;
   };
   const handleClear = (): void => {
     setResult([]);
     setStatus(null);
-  };
-  const correctStatus: any = {
-    entering: {
-      boxShadow: "0 0 10px 0px rgba(0, 128, 0, 1)",
-      background: "rgba(0, 128, 0, .8)",
-    },
-  };
-  const wrongStatus: any = {
-    entering: {
-      boxShadow: "0 0 10px 0px rgba(255, 0, 0, 1)",
-      background: "rgba(255, 0, 0, .8)",
-    },
+    ids.length = 0;
   };
 
   return (
     <Container className={classes.container}>
-      <div className={classes.header}>
-        <Transition in={!!status} timeout={1000} nodeRef={correctRef}>
-          {(state) => (
-            <Paper
-              elevation={15}
-              className={classes.statsOfCorrectAnswers}
-              style={{ ...correctStatus[state] }}
-              ref={correctRef}
-            >
-              Correct
-              <br />
-              {stats.correct}
-            </Paper>
-          )}
-        </Transition>
-        <Paper elevation={15} className={classes.scoreStats}>
-          Score
-          <br />
-          {stats.score}
-        </Paper>
-        <Transition in={status === false} timeout={1000} nodeRef={wrongRef}>
-          {(state) => (
-            <Paper
-              elevation={15}
-              className={classes.statsOfWrongAnswers}
-              style={{ ...wrongStatus[state] }}
-              ref={wrongRef}
-            >
-              Wrong
-              <br />
-              {stats.wrong}
-            </Paper>
-          )}
-        </Transition>
-      </div>
+      <Header stats={stats} status={status} />
       <div className={classes.task}>{task || "..."}</div>
       <div className={classes.result}>{result.join(" ")}</div>
       <div className={classes.correctAnswer}>
@@ -239,7 +215,7 @@ const Lesson: React.FC = () => {
                 />
               ) : null}
             </div>
-            <Result status={status} rightAnswer={answer} />
+            <Result status={status} answer={answer} />
           </>
         ) : null}
       </div>
@@ -253,7 +229,7 @@ const Lesson: React.FC = () => {
             {possibleAnswers[random] ? (
               <PossibleAnswersBlock
                 possibleAnswers={possibleAnswers[random]}
-                result={result}
+                ids={ids}
                 handleClick={handleClick}
               />
             ) : null}

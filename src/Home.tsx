@@ -44,7 +44,7 @@ const useStyles = makeStyles({
 
 const Home: React.FC = () => {
   const classes = useStyles();
-  const lessonNumbers: Array<string> = ["1-2", "3-4"];
+  const lessonNumbers: Array<string> = ["1-2", "100 неправильных глаголов", "200 неправильных глаголов", "300 неправильных глаголов"];
 
   return (
     <Container className={classes.container}>

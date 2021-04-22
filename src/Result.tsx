@@ -1,17 +1,13 @@
 import React from "react";
+import { IResult } from "./interfaces";
 
-type ResultType = {
-  status: boolean | null;
-  rightAnswer: string;
-};
-
-const Result = ({ status, rightAnswer }: ResultType) => {
+const Result = ({ status, answer }: IResult) => {
   return status === false ? (
     <div style={{ textAlign: "center" }}>
       Правильный ответ:
       <br />
       <p style={{ margin: 0, color: "green" }}>
-        <b>{rightAnswer}</b>
+        <b>{answer}</b>
       </p>
     </div>
   ) : null;

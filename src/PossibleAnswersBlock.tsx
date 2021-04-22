@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 const PossibleAnswersBlock: React.FC<IPossibleAnswersBlock> = ({
   possibleAnswers,
-  result,
+  ids,
   handleClick,
 }) => {
   const classes = useStyles();
@@ -50,10 +50,13 @@ const PossibleAnswersBlock: React.FC<IPossibleAnswersBlock> = ({
       <TableRow>
         {possibleAnswers.slice(0, 3).map((option: string, index: number) => (
           <TableCell
-            key={option}
+            key={option + index}
+            id={index.toString()}
             align="center"
             className={`${classes.cell} ${
-              result.includes(option) ? classes.selectedCell : ""
+              ids.includes(index.toString())
+                ? classes.selectedCell
+                : null
             } ${index === 0 ? classes.topLeftCellRadius : ""}
                     ${index === 2 ? classes.topRightCellRadius : ""}`}
             onClick={handleClick}
@@ -63,12 +66,15 @@ const PossibleAnswersBlock: React.FC<IPossibleAnswersBlock> = ({
         ))}
       </TableRow>
       <TableRow>
-        {possibleAnswers.slice(3, 6).map((option: string) => (
+        {possibleAnswers.slice(3, 6).map((option: string, index: number) => (
           <TableCell
-            key={option}
+            key={option + index}
+            id={(index + 3).toString()}
             align="center"
             className={`${classes.cell} ${
-              result.includes(option) ? classes.selectedCell : ""
+              ids.includes((index + 3).toString())
+                ? classes.selectedCell
+                : null
             }`}
             onClick={handleClick}
           >
@@ -79,10 +85,13 @@ const PossibleAnswersBlock: React.FC<IPossibleAnswersBlock> = ({
       <TableRow>
         {possibleAnswers.slice(6, 9).map((option: string, index: number) => (
           <TableCell
-            key={option}
+            key={option + index}
+            id={(index + 6).toString()}
             align="center"
             className={`${classes.cell} ${
-              result.includes(option) ? classes.selectedCell : ""
+              ids.includes((index + 6).toString())
+                ? classes.selectedCell
+                : null
             } ${index === 0 ? classes.bottomLeftCellRadius : ""} ${
               index === 2 ? classes.bottomRightCellRadius : ""
             }`}
