@@ -205,8 +205,8 @@ const Lesson: React.FC = () => {
     <Container className={classes.container}>
       <Header stats={stats} status={status} />
       <div className={classes.task}>{task || "..."}</div>
-      <AudioPlayer task={task} />
       <div className={classes.result}>{result.join(" ")}</div>
+      <AudioPlayer task={task} />
       <div className={classes.correctAnswer}>
         {result.length ? (
           <>
