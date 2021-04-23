@@ -15,6 +15,7 @@ import { shuffle } from "./utils";
 import { IStats, ISentences, IPossibleAnswers } from "./interfaces";
 import PossibleAnswersBlock from "./PossibleAnswersBlock";
 import Header from "./Header";
+import AudioPlayer from "./AudioPlayer";
 
 const useStyles = makeStyles({
   container: {
@@ -94,7 +95,7 @@ const Lesson: React.FC = () => {
       await fetch(`http://localhost:3001/lessons/${lessonPath}`)
         .then((res) => res.json())
         .then((json) => {
-          console.log(json.sentences.length);
+          //console.log(json.sentences.length);
 
           setSentences(
             json.sentences.map((i: ISentences) => Object.values(i.sentence))
@@ -204,6 +205,7 @@ const Lesson: React.FC = () => {
     <Container className={classes.container}>
       <Header stats={stats} status={status} />
       <div className={classes.task}>{task || "..."}</div>
+      <AudioPlayer task={task} />
       <div className={classes.result}>{result.join(" ")}</div>
       <div className={classes.correctAnswer}>
         {result.length ? (

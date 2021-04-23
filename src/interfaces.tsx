@@ -12,6 +12,15 @@ export interface IHeader {
   status: null | boolean;
   stats: IStats;
 }
+export interface IAudioPlayer {
+  task: string
+}
+export interface IAudio {
+  firstWord: string,
+  secondWord: string,
+  playUS: () => {},
+  playUK: () => {},
+}
 export interface IPossibleAnswers {
   possibleAnswers: Array<string>;
 }
