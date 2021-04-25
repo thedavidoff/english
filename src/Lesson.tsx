@@ -69,7 +69,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
 });
-const ids: Array<string> = [];
+const ids: string[] = [];
 
 const Lesson: React.FC = () => {
   const [sentences, setSentences] = React.useState<Array<string | []>>([]);
@@ -87,7 +87,7 @@ const Lesson: React.FC = () => {
 
   const { id: lessonPath }: { id: string } = useParams();
   const classes = useStyles();
-  let task: string = "";
+  let task: string | null = null;
   let answer: string = "";
 
   React.useEffect(() => {
@@ -206,7 +206,7 @@ const Lesson: React.FC = () => {
       <Header stats={stats} status={status} />
       <div className={classes.task}>{task || "..."}</div>
       <div className={classes.result}>{result.join(" ")}</div>
-      <AudioPlayer task={task} />
+      {task !== null ? (<AudioPlayer task={task} />) : null}
       <div className={classes.correctAnswer}>
         {result.length ? (
           <>

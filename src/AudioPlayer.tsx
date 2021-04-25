@@ -1,6 +1,6 @@
 import React from "react";
 import useSound from "use-sound";
-import { IAudioPlayer } from "./interfaces";
+import { IAudioPlayerProps } from "./interfaces";
 import US from "./sounds/us";
 import UK from "./sounds/uk";
 import usLogo from "./images/us.svg";
@@ -21,40 +21,43 @@ const useStyles = makeStyles({
   audioPlayerTable: {
     maxWidth: 480,
     "& tr": {
-      height: 47
-    }
+      height: 47,
+    },
   },
   audioPlayerLeftCell: {
-    position: "relative",
-    top: 2.5,
     padding: 8,
     textAlign: "right",
   },
   audioPlayerRightCell: {
     width: 93,
     padding: 8,
-    "& img": {
-      position: "relative",
-      top: 2.5,
-      marginRight: 8,
-      "&:hover": {
-        cursor: "pointer"
-      }
+  },
+  audioPlayerImg: {
+    marginRight: 8,
+    "&:hover": {
+      cursor: "pointer",
     },
-    "& img:last-child": {
-      marginRight: 0
+    "&:last-child": {
+      marginRight: 0,
     },
-  }
+  },
+  audioPlayerDisabledImg: {
+    opacity: 0.3,
+    "&:hover": {
+      cursor: "inherit",
+    },
+  },
 });
 
-const AudioPlayer: React.FC<IAudioPlayer> = React.memo(({ task }) => {
-  console.log(task);
+//let renders = 0;
+
+const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task }) => {
+  // ++renders;
+  // console.log(renders);
 
   const classes = useStyles();
-
   const slashPos: number = task.indexOf("/");
   const spacePos: number = task.indexOf(" ");
-
   let firstWord: string = "";
   let secondWord: string = "";
   if (slashPos !== -1) {
@@ -65,9 +68,49 @@ const AudioPlayer: React.FC<IAudioPlayer> = React.memo(({ task }) => {
     firstWord = task.split(" ")[0];
   }
 
+  const handleMouseEnter = (e: React.MouseEvent<HTMLImageElement>) => {
+    const target = e.currentTarget;
+    let hasClass;
+    target.classList.forEach((val) => {
+      if (val.indexOf("audioPlayerDisabledImg") === -1) {
+        hasClass = false;
+        return;
+      }
+      hasClass = true;
+    });
+    if (hasClass) {
+      return;
+    }
+    switch (target.alt) {
+      case "usLogo":
+        target.src = usLogoHover;
+        return;
+      case "ukLogo":
+        target.src = ukLogoHover;
+        return;
+      case "infoLogo":
+        target.src = infoLogoHover;
+        return;
+    }
+  };
+  const handleMouseLeave = (e: React.MouseEvent<HTMLImageElement>) => {
+    const target = e.currentTarget;
+    switch (target.alt) {
+      case "usLogo":
+        target.src = usLogo;
+        return;
+      case "ukLogo":
+        target.src = ukLogo;
+        return;
+      case "infoLogo":
+        target.src = infoLogo;
+        return;
+    }
+  };
+
   const [playFirstWordUS]: any = useSound(US[firstWord]);
-  const [playSecondWordUS]: any = useSound(US[secondWord]);
   const [playFirstWordUK]: any = useSound(UK[firstWord]);
+  const [playSecondWordUS]: any = useSound(US[secondWord]);
   const [playSecondWordUK]: any = useSound(UK[secondWord]);
 
   return firstWord ? (
@@ -80,24 +123,26 @@ const AudioPlayer: React.FC<IAudioPlayer> = React.memo(({ task }) => {
           <TableCell className={classes.audioPlayerRightCell}>
             <img
               src={usLogo}
-              alt="us-flag"
-              onMouseEnter={(e) => e.currentTarget.src = usLogoHover}
-              onMouseLeave={(e) => e.currentTarget.src = usLogo}
+              alt="usLogo"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               onClick={playFirstWordUS}
+              className={US[firstWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
             />
             <img
               src={ukLogo}
-              alt="uk-flag"
-              onMouseEnter={(e) => e.currentTarget.src = ukLogoHover}
-              onMouseLeave={(e) => e.currentTarget.src = ukLogo}
+              alt="ukLogo"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               onClick={playFirstWordUK}
+              className={UK[firstWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
             />
             <img
               src={infoLogo}
-              alt="info"
-              onMouseEnter={(e) => e.currentTarget.src = infoLogoHover}
-              onMouseLeave={(e) => e.currentTarget.src = infoLogo}
-              onClick={() => console.log("click")}
+              alt="infoLogo"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              className={classes.audioPlayerImg}
             />
           </TableCell>
         </TableRow>
@@ -110,24 +155,26 @@ const AudioPlayer: React.FC<IAudioPlayer> = React.memo(({ task }) => {
               <TableCell className={classes.audioPlayerRightCell}>
                 <img
                   src={usLogo}
-                  alt="us-flag"
-                  onMouseEnter={(e) => e.currentTarget.src = usLogoHover}
-                  onMouseLeave={(e) => e.currentTarget.src = usLogo}
+                  alt="usLogo"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                   onClick={playSecondWordUS}
+                  className={US[secondWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
                 />
                 <img
                   src={ukLogo}
-                  alt="uk-flag"
-                  onMouseEnter={(e) => e.currentTarget.src = ukLogoHover}
-                  onMouseLeave={(e) => e.currentTarget.src = ukLogo}
+                  alt="ukLogo"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
                   onClick={playSecondWordUK}
+                  className={UK[secondWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
                 />
                 <img
                   src={infoLogo}
-                  alt="info"
-                  onMouseEnter={(e) => e.currentTarget.src = infoLogoHover}
-                  onMouseLeave={(e) => e.currentTarget.src = infoLogo}
-                  onClick={() => console.log("click")}
+                  alt="infoLogo"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  className={classes.audioPlayerImg}
                 />
               </TableCell>
             </>

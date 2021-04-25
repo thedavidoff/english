@@ -12,7 +12,7 @@ export interface IHeader {
   status: null | boolean;
   stats: IStats;
 }
-export interface IAudioPlayer {
+export interface IAudioPlayerProps {
   task: string
 }
 export interface IAudio {
