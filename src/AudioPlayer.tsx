@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 
 //let renders = 0;
 
-const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task }) => {
+const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task, transcriptions, translations }) => {
   // ++renders;
   // console.log(renders);
 
@@ -138,15 +138,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task }) => {
               onClick={playFirstWordUK}
               className={UK[firstWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
             />
-            <img
-              src={infoLogo}
-              alt="infoLogo"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              className={classes.audioPlayerImg}
-              onClick={() => console.log("click")}
-            />
-            <InfoModal handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+            <InfoModal word={firstWord} transcriptions={transcriptions} translations={translations} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
           </TableCell>
         </TableRow>
         <TableRow>
@@ -172,13 +164,7 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task }) => {
                   onClick={playSecondWordUK}
                   className={UK[secondWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
                 />
-                <img
-                  src={infoLogo}
-                  alt="infoLogo"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  className={classes.audioPlayerImg}
-                />
+                <InfoModal word={secondWord} transcriptions={transcriptions} translations={translations} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
               </TableCell>
             </>
           ) : null}

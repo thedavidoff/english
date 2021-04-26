@@ -6,14 +6,17 @@ export interface IStats {
   score: number;
 }
 export interface ISentences {
-  sentence: Array<string>;
+  sentence: string[];
 }
+export interface ITranscriptions {[key: string]: string[]}
 export interface IHeader {
   status: null | boolean;
   stats: IStats;
 }
 export interface IAudioPlayerProps {
-  task: string
+  task: string,
+  transcriptions: ITranscriptions,
+  translations: string
 }
 export interface IAudio {
   firstWord: string,
@@ -22,15 +25,18 @@ export interface IAudio {
   playUK: () => {},
 }
 export interface IInfoModalProps {
+  word: string,
+  transcriptions: ITranscriptions,
+  translations: string,
   handleMouseEnter: (e: React.MouseEvent<HTMLImageElement>) => void,
   handleMouseLeave: (e: React.MouseEvent<HTMLImageElement>) => void
 }
 export interface IPossibleAnswers {
-  possibleAnswers: Array<string>;
+  possibleAnswers: string[];
 }
 export interface IPossibleAnswersBlock {
-  possibleAnswers: Array<string>;
-  ids: Array<string>;
+  possibleAnswers: string[];
+  ids: string[];
   handleClick: (event: React.MouseEvent<HTMLTableCellElement>) => void;
 }
 export interface IResult {

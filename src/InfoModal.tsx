@@ -1,50 +1,87 @@
 import React from "react";
-import { Transition } from "react-transition-group";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import infoLogo from "./images/info.svg";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  Modal,
+  Backdrop,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { IInfoModalProps } from "./interfaces";
+import infoLogo from "./images/info.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     audioPlayerImg: {
-      marginRight: 8,
       "&:hover": {
         cursor: "pointer",
       },
     },
-    modal: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+    infoModal: {
+      height: "100%",
+      position: "absolute",
+      top: "50% !important",
+      left: "50% !important",
+      //display: "flex",
+      overflow: "scroll",
+      // alignItems: "center",
+      // justifyContent: "center",
     },
-    paper: {
+    infoModalPaper: {
+      position: "relative",
+      top: "-50% !important",
+      left: "-50% !important",
+      maxWidth: 288,
+      padding: theme.spacing(2, 5, 3),
       backgroundColor: theme.palette.background.paper,
-      border: "2px solid #000",
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+      boxShadow: theme.shadows[15],
+      borderRadius: 10,
+      "&:focus-visible": {
+        outline: "none",
+      },
+      boxSizing: "border-box",
+    },
+    infoModalCloseButton: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      "&:hover": {
+        color: "#f00",
+      },
+    },
+    infoModalTranslationsList: {
+      margin: 0,
+      paddingLeft: 10,
+      listStyle: "none",
+      "& li": {
+        margin: ".5em 0",
+      },
     },
   })
 );
 
 const InfoModal: React.FC<IInfoModalProps> = ({
-  handleMouseEnter,
-  handleMouseLeave,
-}) => {
+                                                word,
+                                                transcriptions,
+                                                translations,
+                                                handleMouseEnter,
+                                                handleMouseLeave,
+                                              }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  const nodeRef = React.useRef(null);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <>
       <img
         src={infoLogo}
         alt="infoLogo"
@@ -53,24 +90,45 @@ const InfoModal: React.FC<IInfoModalProps> = ({
         className={classes.audioPlayerImg}
         onClick={handleOpen}
       />
-      <Modal
-        className={classes.modal}
+      <Dialog
         open={open}
         onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        scroll="body"
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
       >
-        <Transition in={open} timeout={0}>
-          <div className={classes.paper}>
-            <h2>Transition modal</h2>
-            <p>react-transition-group animates me.</p>
-          </div>
-        </Transition>
-      </Modal>
-    </div>
+        <IconButton
+          aria-label="close"
+          className={classes.infoModalCloseButton}
+          onClick={handleClose}
+        >
+          <CloseIcon />
+        </IconButton>
+        <DialogTitle id="scroll-dialog-title">{word}</DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={nodeRef}
+            tabIndex={-1}
+          >
+            <p>
+              <i>амер.</i> <span>| {transcriptions[word][0]} |</span>
+            </p>
+            {transcriptions[word][1] ? (
+              <p>
+                <i>брит.</i> <span>| {transcriptions[word][1]} |</span>
+              </p>
+            ) : null}
+            <hr />
+            <ul className={classes.infoModalTranslationsList}>
+              {translations.split(", ").map((i: string) => {
+                return <li>- {i}</li>;
+              })}
+            </ul>
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

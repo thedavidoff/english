@@ -12,7 +12,12 @@ import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlin
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Result from "./Result";
 import { shuffle } from "./utils";
-import { IStats, ISentences, IPossibleAnswers } from "./interfaces";
+import {
+  IStats,
+  ISentences,
+  ITranscriptions,
+  IPossibleAnswers,
+} from "./interfaces";
 import PossibleAnswersBlock from "./PossibleAnswersBlock";
 import Header from "./Header";
 import AudioPlayer from "./AudioPlayer";
@@ -73,6 +78,7 @@ const ids: string[] = [];
 
 const Lesson: React.FC = () => {
   const [sentences, setSentences] = React.useState<Array<string | []>>([]);
+  const [transcriptions, setTranscriptions] = React.useState([]);
   const [possibleAnswers, setPossibleAnswers] = React.useState<
     Array<Array<string>>
   >([]);
@@ -89,6 +95,7 @@ const Lesson: React.FC = () => {
   const classes = useStyles();
   let task: string | null = null;
   let answer: string = "";
+  let translations: string = "";
 
   React.useEffect(() => {
     (async () => {
@@ -100,11 +107,14 @@ const Lesson: React.FC = () => {
           setSentences(
             json.sentences.map((i: ISentences) => Object.values(i.sentence))
           );
-          let result: Array<Array<string>> = [];
+
+          setTranscriptions(json.sentences.map((i: ITranscriptions) => i.transcriptions));
+
+          let resultPossibleAnswers: Array<Array<string>> = [];
           json.sentences.map((i: IPossibleAnswers) => {
-            return result.push(shuffle(Object.values(i.possibleAnswers)));
+            return resultPossibleAnswers.push(shuffle(Object.values(i.possibleAnswers)));
           });
-          setPossibleAnswers(result);
+          setPossibleAnswers(resultPossibleAnswers);
         })
         .catch((e) => console.log(e));
     })();
@@ -113,6 +123,7 @@ const Lesson: React.FC = () => {
 
   if (possibleAnswers.length) {
     task = sentences[random][0];
+    translations = sentences[random][2];
     if (Array.isArray(sentences[random][1])) {
       answer = `${sentences[random][1][0]
         .toString()
@@ -206,7 +217,7 @@ const Lesson: React.FC = () => {
       <Header stats={stats} status={status} />
       <div className={classes.task}>{task || "..."}</div>
       <div className={classes.result}>{result.join(" ")}</div>
-      {task !== null ? (<AudioPlayer task={task} />) : null}
+      {task !== null ? <AudioPlayer task={task} transcriptions={transcriptions[random]} translations={translations} /> : null}
       <div className={classes.correctAnswer}>
         {result.length ? (
           <>
