@@ -240,7 +240,7 @@ const Lesson: React.FC = () => {
         {status !== null ? (
           <div
             className={classes.status}
-            onClick={!status ? handleClear : () => {}}
+            onClick={!status ? handleClear : undefined}
           >
             {status ? (
               <CheckCircleOutlineOutlinedIcon

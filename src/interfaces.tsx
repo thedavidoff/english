@@ -21,6 +21,10 @@ export interface IAudio {
   playUS: () => {},
   playUK: () => {},
 }
+export interface IInfoModalProps {
+  handleMouseEnter: (e: React.MouseEvent<HTMLImageElement>) => void,
+  handleMouseLeave: (e: React.MouseEvent<HTMLImageElement>) => void
+}
 export interface IPossibleAnswers {
   possibleAnswers: Array<string>;
 }

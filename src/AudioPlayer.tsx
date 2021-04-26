@@ -16,6 +16,7 @@ import {
   TableCell,
   TableRow,
 } from "@material-ui/core";
+import InfoModal from "./InfoModal";
 
 const useStyles = makeStyles({
   audioPlayerTable: {
@@ -143,7 +144,9 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task }) => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               className={classes.audioPlayerImg}
+              onClick={() => console.log("click")}
             />
+            <InfoModal handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
           </TableCell>
         </TableRow>
         <TableRow>
