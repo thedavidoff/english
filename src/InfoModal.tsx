@@ -3,8 +3,6 @@ import {
   makeStyles,
   Theme,
   createStyles,
-  Modal,
-  Backdrop,
   IconButton,
   Dialog,
   DialogTitle,
@@ -22,30 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
         cursor: "pointer",
       },
     },
-    infoModal: {
-      height: "100%",
-      position: "absolute",
-      top: "50% !important",
-      left: "50% !important",
-      //display: "flex",
-      overflow: "scroll",
-      // alignItems: "center",
-      // justifyContent: "center",
-    },
-    infoModalPaper: {
-      position: "relative",
-      top: "-50% !important",
-      left: "-50% !important",
-      maxWidth: 288,
-      padding: theme.spacing(2, 5, 3),
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[15],
-      borderRadius: 10,
-      "&:focus-visible": {
-        outline: "none",
-      },
-      boxSizing: "border-box",
-    },
     infoModalCloseButton: {
       position: "absolute",
       top: 0,
@@ -60,18 +34,19 @@ const useStyles = makeStyles((theme: Theme) =>
       listStyle: "none",
       "& li": {
         margin: ".5em 0",
+        wordBreak: "break-all"
       },
     },
   })
 );
 
 const InfoModal: React.FC<IInfoModalProps> = ({
-                                                word,
-                                                transcriptions,
-                                                translations,
-                                                handleMouseEnter,
-                                                handleMouseLeave,
-                                              }) => {
+  word,
+  transcriptions,
+  translations,
+  handleMouseEnter,
+  handleMouseLeave,
+}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 

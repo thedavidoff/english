@@ -28,6 +28,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     padding: 16,
+    paddingTop: 32,
   },
   task: {
     marginBottom: 50,
