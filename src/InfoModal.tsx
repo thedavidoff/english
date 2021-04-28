@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
         cursor: "pointer",
       },
     },
+    infoModal: {
+      borderRadius: 10,
+    },
     infoModalCloseButton: {
       position: "absolute",
       top: 0,
@@ -34,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       listStyle: "none",
       "& li": {
         margin: ".5em 0",
-        wordBreak: "break-all"
+        wordBreak: "break-all",
       },
     },
   })
@@ -69,8 +72,9 @@ const InfoModal: React.FC<IInfoModalProps> = ({
         open={open}
         onClose={handleClose}
         scroll="body"
-        aria-labelledby="scroll-dialog-title"
-        aria-describedby="scroll-dialog-description"
+        PaperProps={{ classes: { root: classes.infoModal } }}
+        aria-labelledby="info-modal-title"
+        aria-describedby="info-modal--description"
       >
         <IconButton
           aria-label="close"
@@ -79,10 +83,10 @@ const InfoModal: React.FC<IInfoModalProps> = ({
         >
           <CloseIcon />
         </IconButton>
-        <DialogTitle id="scroll-dialog-title">{word}</DialogTitle>
+        <DialogTitle id="info-modal-title">{word}</DialogTitle>
         <DialogContent>
           <DialogContentText
-            id="scroll-dialog-description"
+            id="info-modal-description"
             ref={nodeRef}
             tabIndex={-1}
           >
@@ -96,7 +100,7 @@ const InfoModal: React.FC<IInfoModalProps> = ({
             ) : null}
             <hr />
             <ul className={classes.infoModalTranslationsList}>
-              {translations.split(", ").map((i: string) => {
+              {translations.split("; ").map((i: string) => {
                 return <li>- {i}</li>;
               })}
             </ul>
