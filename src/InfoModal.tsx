@@ -1,7 +1,6 @@
 import React from "react";
 import {
   makeStyles,
-  Theme,
   createStyles,
   IconButton,
   Dialog,
@@ -13,11 +12,11 @@ import CloseIcon from "@material-ui/icons/Close";
 import { IInfoModalProps } from "./interfaces";
 import infoLogo from "./images/info.svg";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     audioPlayerImg: {
       "&:hover": {
-        cursor: "pointer",
+        cursor: "pointer"
       },
     },
     infoModal: {

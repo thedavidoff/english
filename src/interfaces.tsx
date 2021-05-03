@@ -1,5 +1,10 @@
 import React from "react";
 
+export interface ISentences {
+  task: string,
+  answer: string | string[],
+  translation: string
+}
 export interface IStats {
   correct: number;
   wrong: number;

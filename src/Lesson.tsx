@@ -78,7 +78,7 @@ const useStyles = makeStyles({
 const ids: string[] = [];
 
 const Lesson: React.FC = () => {
-  const [sentences, setSentences] = React.useState<Array<string | []>>([]);
+  const [sentences, setSentences] = React.useState<Array<ISentences>>([]);
   const [transcriptions, setTranscriptions] = React.useState([]);
   const [possibleAnswers, setPossibleAnswers] = React.useState<
     Array<Array<string>>
@@ -94,7 +94,7 @@ const Lesson: React.FC = () => {
 
   const { id: lessonPath }: { id: string } = useParams();
   const classes = useStyles();
-  let task: string | null = null;
+  let task: string = "";
   let answer: string = "";
   let translations: string = "";
 
@@ -106,33 +106,37 @@ const Lesson: React.FC = () => {
           //console.log(json.sentences.length);
 
           setSentences(
-            json.sentences.map((i: ISentences) => Object.values(i.sentence))
+            json.sentences.map((i: ISentences) => i.sentence)
           );
 
-          setTranscriptions(json.sentences.map((i: ITranscriptions) => i.transcriptions));
+          setTranscriptions(
+            json.sentences.map((i: ITranscriptions) => i.transcriptions)
+          );
 
           let resultPossibleAnswers: Array<Array<string>> = [];
           json.sentences.map((i: IPossibleAnswers) => {
-            return resultPossibleAnswers.push(shuffle(Object.values(i.possibleAnswers)));
+            return resultPossibleAnswers.push(
+              shuffle(Object.values(i.possibleAnswers))
+            );
           });
           setPossibleAnswers(resultPossibleAnswers);
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.error(e));
     })();
     setRandom(Math.floor(Math.random() * sentences.length));
   }, [lessonPath, sentences.length]);
 
   if (possibleAnswers.length) {
-    task = sentences[random][0];
-    translations = sentences[random][2];
-    if (Array.isArray(sentences[random][1])) {
-      answer = `${sentences[random][1][0]
+    task = sentences[random].task;
+    translations = sentences[random].translation;
+    if (Array.isArray(sentences[random].answer)) {
+      answer = `${sentences[random].answer[0]
         .toString()
-        .replaceAll(",", "/")} | ${sentences[random][1][1]
+        .replaceAll(",", "/")} | ${sentences[random].answer[1]
         .toString()
         .replaceAll(",", "/")}`;
     } else {
-      answer = sentences[random][1];
+      answer = sentences[random].answer.toString();
     }
   }
 
@@ -142,7 +146,7 @@ const Lesson: React.FC = () => {
       let innerText: string = e.currentTarget.innerText;
       let classList: DOMTokenList = e.currentTarget.classList;
       let classListValue = classList.value;
-      let correctAnswer = sentences[random][1];
+      let correctAnswer = sentences[random].answer;
       if (status !== null || classListValue.indexOf("selectedCell") !== -1)
         return;
 
@@ -216,9 +220,15 @@ const Lesson: React.FC = () => {
   return (
     <Container className={classes.container}>
       <Header stats={stats} status={status} />
-      <div className={classes.task}>{task || "..."}</div>
+      <div className={classes.task}>{`${task}` || "..."}</div>
       <div className={classes.result}>{result.join(" ")}</div>
-      {task !== null ? <AudioPlayer task={task} transcriptions={transcriptions[random]} translations={translations} /> : null}
+      {task ? (
+        <AudioPlayer
+          task={task}
+          transcriptions={transcriptions[random]}
+          translations={translations}
+        />
+      ) : null}
       <div className={classes.correctAnswer}>
         {result.length ? (
           <>

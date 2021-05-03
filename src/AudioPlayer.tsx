@@ -50,12 +50,7 @@ const useStyles = makeStyles({
   },
 });
 
-//let renders = 0;
-
 const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task, transcriptions, translations }) => {
-  // ++renders;
-  // console.log(renders);
-
   const classes = useStyles();
   const slashPos: number = task.indexOf("/");
   const spacePos: number = task.indexOf(" ");
