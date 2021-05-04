@@ -6,19 +6,13 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { IInfoModalProps } from "./interfaces";
-import infoLogo from "./images/info.svg";
+import InfoSVG from "./images/InfoSVG";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    audioPlayerImg: {
-      "&:hover": {
-        cursor: "pointer"
-      },
-    },
     infoModal: {
       borderRadius: 10,
     },
@@ -46,8 +40,6 @@ const InfoModal: React.FC<IInfoModalProps> = ({
   word,
   transcriptions,
   translations,
-  handleMouseEnter,
-  handleMouseLeave,
 }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -59,14 +51,7 @@ const InfoModal: React.FC<IInfoModalProps> = ({
 
   return (
     <>
-      <img
-        src={infoLogo}
-        alt="infoLogo"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className={classes.audioPlayerImg}
-        onClick={handleOpen}
-      />
+      <InfoSVG onClick={handleOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -83,27 +68,21 @@ const InfoModal: React.FC<IInfoModalProps> = ({
           <CloseIcon />
         </IconButton>
         <DialogTitle id="info-modal-title">{word}</DialogTitle>
-        <DialogContent>
-          <DialogContentText
-            id="info-modal-description"
-            ref={nodeRef}
-            tabIndex={-1}
-          >
+        <DialogContent id="info-modal-description" ref={nodeRef} tabIndex={-1}>
+          <p>
+            <i>амер.</i> <span>| {transcriptions[word][0]} |</span>
+          </p>
+          {transcriptions[word][1] ? (
             <p>
-              <i>амер.</i> <span>| {transcriptions[word][0]} |</span>
+              <i>брит.</i> <span>| {transcriptions[word][1]} |</span>
             </p>
-            {transcriptions[word][1] ? (
-              <p>
-                <i>брит.</i> <span>| {transcriptions[word][1]} |</span>
-              </p>
-            ) : null}
-            <hr />
-            <ul className={classes.infoModalTranslationsList}>
-              {translations.split("; ").map((i: string) => {
-                return <li>- {i}</li>;
-              })}
-            </ul>
-          </DialogContentText>
+          ) : null}
+          <hr />
+          <ul className={classes.infoModalTranslationsList}>
+            {translations.split("; ").map((t: string, index: number) => {
+              return <li key={index}>- {t}</li>;
+            })}
+          </ul>
         </DialogContent>
       </Dialog>
     </>

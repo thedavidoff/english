@@ -33,8 +33,6 @@ export interface IInfoModalProps {
   word: string,
   transcriptions: ITranscriptions,
   translations: string,
-  handleMouseEnter: (e: React.MouseEvent<HTMLImageElement>) => void,
-  handleMouseLeave: (e: React.MouseEvent<HTMLImageElement>) => void
 }
 export interface IPossibleAnswers {
   possibleAnswers: string[];
@@ -47,4 +45,9 @@ export interface IPossibleAnswersBlock {
 export interface IResult {
   status: boolean | null;
   answer: string;
+}
+export interface ISVGProps {
+  disabled?: boolean,
+  className?: string,
+  onClick?: () => void;
 }

@@ -3,7 +3,7 @@ import { Transition } from "react-transition-group";
 import { makeStyles, Paper } from "@material-ui/core";
 import { IHeader } from "./interfaces";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   header: {
     display: "flex",
     width: "100%",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
     color: "#fff",
     background: "rgba(255, 0, 0, .7)",
   },
-});
+}));
 
 const Header: React.FC<IHeader> = ({ status, stats }) => {
   const classes = useStyles();

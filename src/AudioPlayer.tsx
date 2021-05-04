@@ -3,12 +3,6 @@ import useSound from "use-sound";
 import { IAudioPlayerProps } from "./interfaces";
 import US from "./sounds/us";
 import UK from "./sounds/uk";
-import usLogo from "./images/us.svg";
-import usLogoHover from "./images/us-hover.svg";
-import ukLogo from "./images/uk.svg";
-import ukLogoHover from "./images/uk-hover.svg";
-import infoLogo from "./images/info.svg";
-import infoLogoHover from "./images/info-hover.svg";
 import {
   makeStyles,
   Table,
@@ -17,6 +11,8 @@ import {
   TableRow,
 } from "@material-ui/core";
 import InfoModal from "./InfoModal";
+import USSVG from "./images/USSVG";
+import UKSVG from "./images/UKSVG";
 
 const useStyles = makeStyles({
   audioPlayerTable: {
@@ -35,9 +31,6 @@ const useStyles = makeStyles({
   },
   audioPlayerImg: {
     marginRight: 8,
-    "&:hover": {
-      cursor: "pointer",
-    },
     "&:last-child": {
       marginRight: 0,
     },
@@ -57,52 +50,12 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task, transcripti
   let firstWord: string = "";
   let secondWord: string = "";
   if (slashPos !== -1) {
-    // For example: "do/does (делать)"
+    // When there is a slash. For example: "do/does (делать, поступать)"
     firstWord = task.slice(0, slashPos);
     secondWord = task.slice(slashPos + 1, spacePos);
   } else {
     firstWord = task.split(" ")[0];
   }
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLImageElement>) => {
-    const target = e.currentTarget;
-    let hasClass;
-    target.classList.forEach((val) => {
-      if (val.indexOf("audioPlayerDisabledImg") === -1) {
-        hasClass = false;
-        return;
-      }
-      hasClass = true;
-    });
-    if (hasClass) {
-      return;
-    }
-    switch (target.alt) {
-      case "usLogo":
-        target.src = usLogoHover;
-        return;
-      case "ukLogo":
-        target.src = ukLogoHover;
-        return;
-      case "infoLogo":
-        target.src = infoLogoHover;
-        return;
-    }
-  };
-  const handleMouseLeave = (e: React.MouseEvent<HTMLImageElement>) => {
-    const target = e.currentTarget;
-    switch (target.alt) {
-      case "usLogo":
-        target.src = usLogo;
-        return;
-      case "ukLogo":
-        target.src = ukLogo;
-        return;
-      case "infoLogo":
-        target.src = infoLogo;
-        return;
-    }
-  };
 
   const [playFirstWordUS]: any = useSound(US[firstWord]);
   const [playFirstWordUK]: any = useSound(UK[firstWord]);
@@ -117,23 +70,17 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task, transcripti
             {firstWord}
           </TableCell>
           <TableCell className={classes.audioPlayerRightCell}>
-            <img
-              src={usLogo}
-              alt="usLogo"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+            <USSVG
+              disabled={!US[firstWord]}
+              className={classes.audioPlayerImg}
               onClick={playFirstWordUS}
-              className={US[firstWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
             />
-            <img
-              src={ukLogo}
-              alt="ukLogo"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+            <UKSVG
+              disabled={!UK[firstWord]}
+              className={classes.audioPlayerImg}
               onClick={playFirstWordUK}
-              className={UK[firstWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
             />
-            <InfoModal word={firstWord} transcriptions={transcriptions} translations={translations} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+            <InfoModal word={firstWord} transcriptions={transcriptions} translations={translations} />
           </TableCell>
         </TableRow>
         <TableRow>
@@ -143,23 +90,17 @@ const AudioPlayer: React.FC<IAudioPlayerProps> = React.memo(({ task, transcripti
                 {secondWord}
               </TableCell>
               <TableCell className={classes.audioPlayerRightCell}>
-                <img
-                  src={usLogo}
-                  alt="usLogo"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                <USSVG
+                  disabled={!US[secondWord]}
+                  className={classes.audioPlayerImg}
                   onClick={playSecondWordUS}
-                  className={US[secondWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
                 />
-                <img
-                  src={ukLogo}
-                  alt="ukLogo"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                <UKSVG
+                  disabled={!UK[secondWord]}
+                  className={classes.audioPlayerImg}
                   onClick={playSecondWordUK}
-                  className={UK[secondWord] ? classes.audioPlayerImg : `${classes.audioPlayerImg} ${classes.audioPlayerDisabledImg}`}
                 />
-                <InfoModal word={secondWord} transcriptions={transcriptions} translations={translations} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+                <InfoModal word={secondWord} transcriptions={transcriptions} translations={translations} />
               </TableCell>
             </>
           ) : null}

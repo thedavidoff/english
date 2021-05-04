@@ -7,6 +7,7 @@ import {
   Paper,
   Table,
   TableBody,
+  CircularProgress
 } from "@material-ui/core";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
@@ -105,9 +106,7 @@ const Lesson: React.FC = () => {
         .then((json) => {
           //console.log(json.sentences.length);
 
-          setSentences(
-            json.sentences.map((i: ISentences) => i.sentence)
-          );
+          setSentences(json.sentences.map((i: ISentences) => i.sentence));
 
           setTranscriptions(
             json.sentences.map((i: ITranscriptions) => i.transcriptions)
@@ -220,7 +219,15 @@ const Lesson: React.FC = () => {
   return (
     <Container className={classes.container}>
       <Header stats={stats} status={status} />
-      <div className={classes.task}>{`${task}` || "..."}</div>
+      <div className={classes.task}>
+        {task
+          ? `${task} (${translations
+              .split("; ")
+              .slice(0, 2)
+              .join(", ")
+              .toString()})`
+          : <CircularProgress color="inherit" />}
+      </div>
       <div className={classes.result}>{result.join(" ")}</div>
       {task ? (
         <AudioPlayer
