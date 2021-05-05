@@ -15,6 +15,7 @@ import Result from "./Result";
 import { shuffle } from "./utils";
 import {
   IStats,
+  ISentence,
   ISentences,
   ITranscriptions,
   IPossibleAnswers,
@@ -79,7 +80,7 @@ const useStyles = makeStyles({
 const ids: string[] = [];
 
 const Lesson: React.FC = () => {
-  const [sentences, setSentences] = React.useState<Array<ISentences>>([]);
+  const [sentences, setSentences] = React.useState<Array<ISentence>>([]);
   const [transcriptions, setTranscriptions] = React.useState([]);
   const [possibleAnswers, setPossibleAnswers] = React.useState<
     Array<Array<string>>

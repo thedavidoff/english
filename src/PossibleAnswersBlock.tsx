@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles, TableCell, TableRow } from "@material-ui/core";
-import { IPossibleAnswersBlock } from "./interfaces";
+import { IPossibleAnswersBlockProps } from "./interfaces";
 
 const useStyles = makeStyles({
   cell: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PossibleAnswersBlock: React.FC<IPossibleAnswersBlock> = ({
+const PossibleAnswersBlock: React.FC<IPossibleAnswersBlockProps> = ({
   possibleAnswers,
   ids,
   handleClick,

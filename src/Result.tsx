@@ -1,7 +1,7 @@
 import React from "react";
-import { IResult } from "./interfaces";
+import { IResultProps } from "./interfaces";
 
-const Result: React.FC<IResult> = ({ status, answer }) => {
+const Result: React.FC<IResultProps> = ({ status, answer }) => {
   return status === false ? (
     <div style={{ textAlign: "center" }}>
       Правильный ответ:
