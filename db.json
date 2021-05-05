@@ -1891,7 +1891,7 @@
             "translation": "будить; просыпаться; проснуться; пробудиться; пробуждать"
           },
           "transcriptions": {"awake": ["əˈweɪk", "əˈweɪk"], "awoke": ["əˈwəʊk", "əˈwəʊk"], "awoken":  ["əˈwəʊkən", "əˈwəʊkən"]},
-          "possibleAnswers": ["awoke", "awoken", "awoked", "awike", "awiken", "awiked", "awake", "awaken", "awaked"]
+          "possibleAnswers": ["awoke", "awoken", "awoked ", "awike", "awiken", "awiked", "awake", "awaken", "awaked"]
         },
         {
           "sentence": {
