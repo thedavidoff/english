@@ -2017,7 +2017,7 @@
             "could": ["kʊd", "kʊd"],
             "been able": ["bɪn ˈeɪbl", "biːn ˈeɪbl"]
           },
-          "possibleAnswers": ["could", "been able", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["could", "been able", "could", "been able", "coud", "coud", "culd", "cud", "cud"]
         },
         {
           "sentence": {
@@ -2279,7 +2279,7 @@
             "get": ["ɡet", "ɡet"],
             "got": ["ɡɑːt", "ˈɡɒt"]
           },
-          "possibleAnswers": ["got", "got", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["got", "got", "gat", "gat", "gotted", "gotted", "got", "gat", "gotted"]
         },
         {
           "sentence": {
@@ -2292,7 +2292,7 @@
             "gave": ["ɡeɪv", "ɡeɪv"],
             "given": ["ˈɡɪvn", "ˈɡɪv(ə)n"]
           },
-          "possibleAnswers": ["gave", "given", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["gave", "given", "gaven", "gaven", "gave", "given", "give", "give", "give"]
         },
         {
           "sentence": {
@@ -2305,7 +2305,7 @@
             "went": ["went", "ˈwent"],
             "gone": ["ɡɔːn", "ɡɒn"]
           },
-          "possibleAnswers": ["went", "gone", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["went", "gone", "got", "got", "went", "gone", "gane", "gane", "went"]
         },
         {
           "sentence": {
@@ -2318,7 +2318,7 @@
             "grew": ["ɡruː", "ɡruː"],
             "grown": ["ɡrəʊn", "ɡrəʊn"]
           },
-          "possibleAnswers": ["grew", "grown", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["grew", "grown", "grewed", "grewed", "grew", "grown", "gruw", "gruw", "grow"]
         },
         {
           "sentence": {
@@ -2331,7 +2331,7 @@
             "has": ["hæz", "hæz"],
             "had": ["hæd", "hæd"]
           },
-          "possibleAnswers": ["had", "had", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["had", "had", "hed", "hed", "hud", "hud", "hid", "hid", "hadded"]
         },
         {
           "sentence": {
@@ -2343,7 +2343,7 @@
             "hear": ["hɪr", "hɪə"],
             "heard": ["ˈhɜːd", "hɜːd"]
           },
-          "possibleAnswers": ["heard", "heard", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["heard", "heard", "hearded", "hearded", "heart", "heart", "heart", "heard", "hearded"]
         },
         {
           "sentence": {
@@ -2356,7 +2356,7 @@
             "hid": ["hɪd", "hɪd"],
             "hidden": ["ˈhɪdn", "ˈhɪdn"]
           },
-          "possibleAnswers": ["hid", "hidden", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["hid", "hidden", "hide", "hide", "hid", "hid", "hidden", "hidden", "hidded"]
         },
         {
           "sentence": {
@@ -2367,7 +2367,7 @@
           "transcriptions": {
             "hit": ["hɪt", "hɪt"]
           },
-          "possibleAnswers": ["hit", "hit", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["hit", "hit", "hat", "hat", "hut", "hut", "hit", "hat", "hut"]
         },
         {
           "sentence": {
@@ -2379,7 +2379,7 @@
             "hold": ["həʊld", "həʊld"],
             "held": ["held", "held"]
           },
-          "possibleAnswers": ["held", "held", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["held", "held", "hold", "hold", "holded", "holded", "hald", "hald", "huld"]
         },
         {
           "sentence": {
@@ -2390,7 +2390,7 @@
           "transcriptions": {
             "hurt": ["hɜːrt", "hɜːt"]
           },
-          "possibleAnswers": ["hurt", "hurt", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["hurt", "hurt", "hurt", "hurted", "hurted", "hurted", "hart", "hart", "hort"]
         },
         {
           "sentence": {
@@ -2402,7 +2402,7 @@
             "keep": ["kiːp", "kiːp"],
             "kept": ["kept", "kept"]
           },
-          "possibleAnswers": ["kept", "kept", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["kept", "kept", "keepped", "keepped", "", "kipt", "kipt", "kept", "kapt"]
         },
         {
           "sentence": {
@@ -2415,7 +2415,7 @@
             "knew": ["nuː", "njuː"],
             "known": ["nəʊn", "nəʊn"]
           },
-          "possibleAnswers": ["knew", "known", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["knew", "known", "knowed", "knowed", "knowt", "knowt", "knew", "known", "knowt"]
         },
         {
           "sentence": {
@@ -2427,7 +2427,7 @@
             "lay": ["leɪ", "leɪ"],
             "laid": ["leɪd", "leɪd"]
           },
-          "possibleAnswers": ["laid", "laid", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["laid", "laid", "laid", "laided", "lait", "lait", "lay", "lay", "lay"]
         },
         {
           "sentence": {
@@ -2439,7 +2439,7 @@
             "lead": ["liːd", "liːd"],
             "led": ["led", "led"]
           },
-          "possibleAnswers": ["led", "led", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["led", "led", "leaded", "leaded", "leaded", "let", "let", "lead", "lead"]
         },
         {
           "sentence": {
@@ -2452,7 +2452,7 @@
             "learnt": ["ˈlɜːnt", "lɜːnt"],
             "learned": ["ˈlɜːrnɪd", "ˈlɜːnɪd"]
           },
-          "possibleAnswers": ["learnt", "learned", "learnt", "learned", "", "", "", "", ""]
+          "possibleAnswers": ["learnt", "learned", "learnt", "learned", "learned", "learnt", "liarn", "liarn", "learn"]
         },
         {
           "sentence": {
@@ -2464,7 +2464,7 @@
             "leave": ["liːv", "liːv"],
             "left": ["left", "left"]
           },
-          "possibleAnswers": ["left", "left", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["left", "left", "leaved", "leaved", "leave", "leave", "lift", "lift", "laft"]
         },
         {
           "sentence": {
@@ -2475,7 +2475,7 @@
           "transcriptions": {
             "let": ["let", "let"]
           },
-          "possibleAnswers": ["let", "let", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["let", "let", "let", "let", "lat", "lat", "lut", "lut", "lit"]
         },
         {
           "sentence": {
@@ -2488,7 +2488,7 @@
             "lay": ["leɪ", "leɪ"],
             "lain": ["leɪn", "leɪn"]
           },
-          "possibleAnswers": ["lay", "lain", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["lay", "lain", "lied", "lied", "lay", "lain", "layd", "layd", "layd"]
         },
         {
           "sentence": {
@@ -2500,7 +2500,7 @@
             "light": ["laɪt", "laɪt"],
             "lit": ["lɪt", "lɪt"]
           },
-          "possibleAnswers": ["lit", "lit", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["lit", "lit", "lighted", "lighted", "lat", "lat", "let", "let", "lit"]
         },
         {
           "sentence": {
@@ -2512,7 +2512,7 @@
             "lose": ["luːz", "luːz"],
             "lost": ["lɔːst", "lɒst"]
           },
-          "possibleAnswers": ["lost", "lost", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["lost", "lost", "last", "last", "losed", "losed", "loset", "loset", "lost"]
         },
         {
           "sentence": {
@@ -2524,7 +2524,7 @@
             "make": ["meɪk", "meɪk"],
             "made": ["meɪd", "ˈmeɪd"]
           },
-          "possibleAnswers": ["made", "made", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["made", "made", "maked", "maked", "maked", "made", "made", "maket", "maket"]
         },
         {
           "sentence": {
@@ -2536,7 +2536,7 @@
             "may": ["meɪ", "meɪ"],
             "might": ["maɪt", "maɪt"]
           },
-          "possibleAnswers": ["might", "might", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["might", "might", "maid", "maid", "maid", "mit", "mit", "might", "maid"]
         },
         {
           "sentence": {
@@ -2548,7 +2548,7 @@
             "mean": ["miːn", "miːn"],
             "meant": ["ment", "ment"]
           },
-          "possibleAnswers": ["meant", "meant", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["meant", "meant", "meaned", "meaned", "meaned", "meant", "ment", "ment", "ment"]
         },
         {
           "sentence": {
@@ -2560,7 +2560,7 @@
             "meet": ["miːt", "miːt"],
             "met": ["met", "met"]
           },
-          "possibleAnswers": ["met", "met", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["met", "met", "meetted", "meetted", "mit", "mit", "mat", "mut", "met"]
         },
         {
           "sentence": {
@@ -2573,7 +2573,7 @@
             "mistook": ["mɪˈstʊk", "mɪˈstʊk"],
             "mistaken": ["mɪˈsteɪkən", "mɪˈsteɪk(ə)n"]
           },
-          "possibleAnswers": ["mistook", "mistaken", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["mistook", "mistaken", "mistaked", "mistaked", "mistaked", "mistuk", "mistuk", "mistakt", "mistakt"]
         },
         {
           "sentence": {
@@ -2585,7 +2585,7 @@
             "pay": ["peɪ", "peɪ"],
             "paid": ["peɪd", "peɪd"]
           },
-          "possibleAnswers": ["paid", "paid", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["paid", "paid", "pay", "pay", "pight", "pight", "pight", "payd", "payd"]
         },
         {
           "sentence": {
@@ -2598,7 +2598,7 @@
             "proved": ["ˈpruːvd", "pruːvd"],
             "proven": ["ˈpruːvən", "ˈpruːvən"]
           },
-          "possibleAnswers": ["proved", "proved", "proven", "", "", "", "", "", ""]
+          "possibleAnswers": ["proved", "proved", "proven", "provet", "provet", "provd", "provd", "pruve", "pruve"]
         },
         {
           "sentence": {
@@ -2609,7 +2609,7 @@
           "transcriptions": {
             "put": ["pʊt", "pʊt"]
           },
-          "possibleAnswers": ["put", "put", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["put", "put", "put", "pat", "pat", "pet", "pet", "putted", "putted"]
         },
         {
           "sentence": {
@@ -2620,7 +2620,7 @@
           "transcriptions": {
             "quit": ["kwɪt", "kwɪt"]
           },
-          "possibleAnswers": ["quit", "quit", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["quit", "quit", "quit", "quited", "quited", "quited", "qait", "qait", "qait"]
         },
         {
           "sentence": {
@@ -2631,7 +2631,7 @@
           "transcriptions": {
             "read": ["riːd / red (p.t., p.p.)", "riːd / red (p.t., p.p.)"]
           },
-          "possibleAnswers": ["read", "read", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["read", "read", "rid", "rid", "rid", "red", "red", "rud", "rud"]
         },
         {
           "sentence": {
@@ -2644,7 +2644,7 @@
             "rode": ["rəʊd", "rəʊd"],
             "ridden": ["ˈrɪdn", "ˈrɪdn"]
           },
-          "possibleAnswers": ["rode", "ridden", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["rode", "ridden", "rided", "rided", "roden", "roden", "rode", "ridden", "ride"]
         },
         {
           "sentence": {
@@ -2657,7 +2657,7 @@
             "rang": ["ræŋ", "ræŋ"],
             "rung": ["rʌŋ", "rʌŋ"]
           },
-          "possibleAnswers": ["rang", "rung", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["rang", "rung", "ringed", "ringed", "ringt", "ringt", "reng", "reng", "rang"]
         },
         {
           "sentence": {
@@ -2670,7 +2670,7 @@
             "rose": ["rəʊz", "rəʊz"],
             "risen": ["ˈrɪzən", "ˈrɪzən"]
           },
-          "possibleAnswers": ["rose", "risen", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["rose", "risen", "rised", "rised", "rosed", "rose", "riset", "rise", "risen"]
         },
         {
           "sentence": {
@@ -2682,7 +2682,7 @@
             "run": ["rʌn", "rʌn"],
             "ran": ["ræn", "ræn"]
           },
-          "possibleAnswers": ["ran", "run", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["ran", "run", "ran", "ren", "ren", "runned", "runned", "runt", "runt"]
         },
         {
           "sentence": {
@@ -2694,7 +2694,7 @@
             "say": ["seɪ", "seɪ"],
             "said": ["sed", "ˈsed"]
           },
-          "possibleAnswers": ["said", "said", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["said", "said", "saught", "saught", "saught", "sought", "sought", "sait", "sait"]
         },
         {
           "sentence": {
@@ -2707,7 +2707,7 @@
             "saw": ["sɔː", "ˈsɔː"],
             "seen": ["siːn", "ˈsiːn"]
           },
-          "possibleAnswers": ["saw", "seen", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["saw", "seen", "sin", "sin", "sow", "sow", "seeded", "seeded", "saw"]
         },
         {
           "sentence": {
@@ -2719,7 +2719,7 @@
             "seek": ["siːk", "siːk"],
             "sought": ["sɔːt", "sɔːt"]
           },
-          "possibleAnswers": ["sought", "sought", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sought", "sought", "sik", "sik", "souht", "souht", "soght", "soght", "sot"]
         },
         {
           "sentence": {
@@ -2731,7 +2731,7 @@
             "sell": ["sel", "sel"],
             "sold": ["səʊld", "səʊld"]
           },
-          "possibleAnswers": ["sold", "sold", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sold", "sold", "selled", "selled", "selt", "selt", "sald", "suld", "seld"]
         },
         {
           "sentence": {
@@ -2743,7 +2743,7 @@
             "send": ["send", "send"],
             "sent": ["sent", "sent"]
           },
-          "possibleAnswers": ["sent", "sent", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sent", "sent", "send", "send", "sended", "sended", "sent", "sand", "sand"]
         },
         {
           "sentence": {
@@ -2754,7 +2754,7 @@
           "transcriptions": {
             "set": ["set", "set"]
           },
-          "possibleAnswers": ["set", "set", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["set", "set", "set", "sat", "sat", "setted", "setted", "sut", "sut"]
         },
         {
           "sentence": {
@@ -2767,7 +2767,7 @@
             "shaved": ["ˈʃeɪvd", "ʃeɪvd"],
             "shaven": ["ˈʃeɪvn", "ˈʃeɪvn"]
           },
-          "possibleAnswers": ["shaved", "shaved", "shaven", "", "", "", "", "", ""]
+          "possibleAnswers": ["shaved", "shaved", "shaven", "shaved", "shaven", "shavet", "shavet", "shuve", "sheve"]
         },
         {
           "sentence": {
@@ -2779,7 +2779,7 @@
             "shine": ["ʃaɪn", "ʃaɪn"],
             "shone": ["ʃəʊn", "ʃɒn"]
           },
-          "possibleAnswers": ["shone", "shone", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["shone", "shone", "shined", "shined", "shined", "shone", "shane", "shane", "shane"]
         },
         {
           "sentence": {
@@ -2791,7 +2791,7 @@
             "shoot": ["ʃuːt", "ʃuːt"],
             "shot": ["ʃɑːt", "ʃɒt"]
           },
-          "possibleAnswers": ["shot", "shot", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["shot", "shot", "shoot", "shoot", "shot", "shut", "shat", "shut", "shat"]
         },
         {
           "sentence": {
@@ -2804,7 +2804,7 @@
             "showed": ["ʃəʊd", "ʃəʊd"],
             "shown": ["ʃəʊn", "ʃəʊn"]
           },
-          "possibleAnswers": ["showed", "shown", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["showed", "shown", "show", "show", "showt", "showt", "showet", "showet", "shown"]
         },
         {
           "sentence": {
@@ -2815,7 +2815,7 @@
           "transcriptions": {
             "shut": ["ʃʌt", "ʃʌt"]
           },
-          "possibleAnswers": ["shut", "shut", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["shut", "shut", "shut", "shat", "shat", "shet", "shet", "shot", "shot"]
         },
         {
           "sentence": {
@@ -2828,7 +2828,7 @@
             "sang": ["sæŋ", "sæŋ"],
             "sung": ["sʌŋ", "sʌŋ"]
           },
-          "possibleAnswers": ["sang", "sung", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sang", "sung", "sing", "sing", "sang", "sang", "sung", "sung", "seng"]
         },
         {
           "sentence": {
@@ -2840,7 +2840,7 @@
             "sit": ["sɪt", "sɪt"],
             "sat": ["sæt", "sæt"]
           },
-          "possibleAnswers": ["sat", "sat", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sat", "sat", "sut", "sut", "sut", "set", "set", "sat", "sit"]
         },
         {
           "sentence": {
@@ -2852,7 +2852,7 @@
             "sleep": ["sliːp", "sliːp"],
             "slept": ["slept", "slept"]
           },
-          "possibleAnswers": ["slept", "slept", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["slept", "slept", "sleepped", "sleepped", "sleept", "sleept", "slip", "slip", "slept"]
         },
         {
           "sentence": {
@@ -2864,7 +2864,7 @@
             "smell": ["smel", "smel"],
             "smelt": ["smelt", "smelt"]
           },
-          "possibleAnswers": ["smelt", "smelt", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["smelt", "smelt", "smelled", "smelled", "smelled", "smeld", "smeld", "smalt", "smalt"]
         },
         {
           "sentence": {
@@ -2877,7 +2877,7 @@
             "spoke": ["spəʊk", "spəʊk"],
             "spoken": ["ˈspəʊkən", "ˈspəʊk(ə)n"]
           },
-          "possibleAnswers": ["spoke", "spoken", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["spoke", "spoken", "speaked", "speaked", "speaked", "speakt", "speakt", "spoket", "spoket"]
         },
         {
           "sentence": {
@@ -2889,7 +2889,7 @@
             "speed": ["spiːd", "spiːd"],
             "sped": ["ˈsped", "sped"]
           },
-          "possibleAnswers": ["sped", "sped", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["sped", "sped", "sped", "speeded", "speeded", "speeded", "spid", "spud", "spad"]
         },
         {
           "sentence": {
@@ -2901,7 +2901,7 @@
             "spend": ["spend", "spend"],
             "spent": ["spent", "spent"]
           },
-          "possibleAnswers": ["spent", "spent", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["spent", "spent", "spend", "spend", "spend", "spent", "spended", "spended", "spended"]
         },
         {
           "sentence": {
@@ -2912,7 +2912,7 @@
           "transcriptions": {
             "split": ["splɪt", "splɪt"]
           },
-          "possibleAnswers": ["split", "split", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["split", "split", "split", "splited", "splited", "splited", "splat", "splat", "splut"]
         },
         {
           "sentence": {
@@ -2924,7 +2924,7 @@
             "stand": ["stænd", "stænd"],
             "stood": ["stʊd", "stʊd"]
           },
-          "possibleAnswers": ["stood", "stood", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["stood", "stood", "stand", "stand", "stend", "stend", "standed", "standed", "stant"]
         },
         {
           "sentence": {
@@ -2937,7 +2937,7 @@
             "stole": ["stəʊl", "stəʊl"],
             "stolen": ["ˈstəʊlən", "ˈstəʊlən"]
           },
-          "possibleAnswers": ["stole", "stolen", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["stole", "stolen", "stealt", "stealt", "stealt", "stule", "stealed", "stealed", "stolent"]
         },
         {
           "sentence": {
@@ -2949,7 +2949,7 @@
             "strike": ["straɪk", "straɪk"],
             "struck": ["strʌk", "strʌk"]
           },
-          "possibleAnswers": ["struck", "struck", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["struck", "struck", "striked", "striked", "striked", "strikt", "strikt", "strack", "strack"]
         },
         {
           "sentence": {
@@ -2962,7 +2962,7 @@
             "swore": ["swɔːr", "swɔː"],
             "sworn": ["swɔːrn", "swɔːn"]
           },
-          "possibleAnswers": ["swore", "sworn", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["swore", "sworn", "sweared", "sweared", "swored", "swored", "swort", "swort", "sweart"]
         },
         {
           "sentence": {
@@ -2975,7 +2975,7 @@
             "swam": ["swæm", "swæm"],
             "swum": ["swʌm", "swʌm"]
           },
-          "possibleAnswers": ["swam", "swum", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["swam", "swum", "swim", "swim", "swam", "swum", "swem", "swem", "swimt"]
         },
         {
           "sentence": {
@@ -2988,7 +2988,7 @@
             "took": ["tʊk", "tʊk"],
             "taken": ["ˈteɪkən", "ˈteɪkən"]
           },
-          "possibleAnswers": ["took", "taken", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["took", "taken", "taked", "taked", "taked", "tookt", "tookt", "takent", "takent"]
         },
         {
           "sentence": {
@@ -3000,7 +3000,7 @@
             "teach": ["tiːtʃ", "tiːtʃ"],
             "taught": ["tɔːt", "tɔːt"]
           },
-          "possibleAnswers": ["taught", "taught", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["taught", "taught", "teached", "teached", "tought", "tought", "tauht", "taugt", "taugt"]
         },
         {
           "sentence": {
@@ -3012,7 +3012,7 @@
             "tell": ["tel", "tel"],
             "told": ["təʊld", "təʊld"]
           },
-          "possibleAnswers": ["told", "told", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["told", "told", "telled", "telled", "telt", "telt", "tolt", "tolt", "told"]
         },
         {
           "sentence": {
@@ -3024,7 +3024,7 @@
             "think": ["θɪŋk", "θɪŋk"],
             "thought": ["θɔːt", "θɔːt"]
           },
-          "possibleAnswers": ["thought", "thought", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["thought", "thought", "thinked", "thinked", "thinkt", "thinkt", "thouht", "thouht", "thougt"]
         },
         {
           "sentence": {
@@ -3037,7 +3037,7 @@
             "threw": ["θruː", "θruː"],
             "thrown": ["θrəʊn", "θrɒʊn"]
           },
-          "possibleAnswers": ["threw", "thrown", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["threw", "thrown", "throwed", "throwed", "threw", "thrown", "throwt", "throwt", "thrownt"]
         },
         {
           "sentence": {
@@ -3049,7 +3049,7 @@
             "understand": ["ˌʌndərˈstænd", "ˌʌndəˈstænd"],
             "understood": ["ˌʌndərˈstʊd", "ʌndəˈstʊd"]
           },
-          "possibleAnswers": ["understood", "understood", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["understood", "understood", "understand", "understand", "understanded", "understanded", "understud", "understud", "anderstood"]
         },
         {
           "sentence": {
@@ -3062,7 +3062,7 @@
             "woke": ["wəʊk", "wəʊk"],
             "woken": ["ˈwəʊkən", "ˈwəʊkən"]
           },
-          "possibleAnswers": ["woke", "woken", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["woke", "woken", "waked", "waked", "woke", "woken", "waket", "waket", "wake"]
         },
         {
           "sentence": {
@@ -3075,7 +3075,7 @@
             "wore": ["wɔːr", "wɔː"],
             "worn": ["wɔːrn", "wɔːn"]
           },
-          "possibleAnswers": ["wore", "worn", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["wore", "worn", "weared", "weared", "woren", "woren", "wornt", "wornt", "wore"]
         },
         {
           "sentence": {
@@ -3086,7 +3086,7 @@
           "transcriptions": {
             "wet": ["wet", "wet"]
           },
-          "possibleAnswers": ["wet", "wetted", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["wet", "wetted", "wet", "wet", "wetted", "wetted", "wat", "wat", "wot"]
         },
         {
           "sentence": {
@@ -3098,7 +3098,7 @@
             "win": ["wɪn", "wɪn"],
             "won": ["wʌn", "wʌn"]
           },
-          "possibleAnswers": ["won", "won", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["won", "won", "wint", "wint", "won", "wont", "wont", "wan", "wan"]
         },
         {
           "sentence": {
@@ -3111,7 +3111,7 @@
             "wrote": ["rəʊt", "rəʊt"],
             "written": ["ˈrɪtn", "ˈrɪtn"]
           },
-          "possibleAnswers": ["wrote", "written", "", "", "", "", "", "", ""]
+          "possibleAnswers": ["wrote", "written", "writed", "writed", "wrot", "wrot", "writ", "writ", "wrate"]
         }
       ]
     },
