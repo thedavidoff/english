@@ -23,6 +23,7 @@ import {
 import PossibleAnswersBlock from "./PossibleAnswersBlock";
 import Header from "./Header";
 import AudioPlayer from "./AudioPlayer";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles({
   container: {
@@ -218,6 +219,12 @@ const Lesson: React.FC = () => {
   };
 
   return (
+<>
+    <Helmet>
+      <meta charSet="utf-8" />
+      <title>{`Lesson ${lessonPath} - | English App`}</title>
+      <link rel="canonical" href={`/${lessonPath}`} />
+    </Helmet>
     <Container className={classes.container}>
       <Header stats={stats} status={status} />
       <div className={classes.task}>
@@ -285,6 +292,7 @@ const Lesson: React.FC = () => {
         ) : null}
       </TableContainer>
     </Container>
+  </>
   );
 };
 

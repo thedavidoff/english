@@ -10,6 +10,7 @@ import {
   TableContainer,
   TableCell,
 } from "@material-ui/core";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles({
   container: {
@@ -47,27 +48,34 @@ const Home: React.FC = () => {
   const lessonNumbers: Array<string> = ["1-2", "100 неправильных глаголов", "200 неправильных глаголов", "300 неправильных глаголов"];
 
   return (
-    <Container className={classes.container}>
-      <TableContainer
-        component={Paper}
-        elevation={15}
-        className={classes.tableContainer}
-      >
-        <Table className={classes.tableOfLinks}>
-          <TableBody>
-            {lessonNumbers.map((lesson, index) => (
-              <TableRow key={index}>
-                <TableCell>
-                  <NavLink to={`/${index + 1}`}>{`Урок ${
-                    index + 1
-                  } (${lesson})`}</NavLink>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home | English App</title>
+        <link rel="canonical" href="/" />
+      </Helmet>
+      <Container className={classes.container}>
+        <TableContainer
+          component={Paper}
+          elevation={15}
+          className={classes.tableContainer}
+        >
+          <Table className={classes.tableOfLinks}>
+            <TableBody>
+              {lessonNumbers.map((lesson, index) => (
+                <TableRow key={index}>
+                  <TableCell>
+                    <NavLink to={`/${index + 1}`}>{`Урок ${
+                      index + 1
+                    } (${lesson})`}</NavLink>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </>
   );
 };
 
