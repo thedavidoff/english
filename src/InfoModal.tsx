@@ -10,6 +10,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { IInfoModalProps } from "./interfaces";
 import InfoSVG from "./images/InfoSVG";
+import {addItalicToLi} from "./utils";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -32,6 +33,10 @@ const useStyles = makeStyles(() =>
         margin: ".5em 0",
         wordBreak: "break-all",
       },
+      "& i": {
+        fontSize: 12,
+        color: "#909090"
+      }
     },
   })
 );
@@ -79,9 +84,7 @@ const InfoModal: React.FC<IInfoModalProps> = ({
           ) : null}
           <hr />
           <ul className={classes.infoModalTranslationsList}>
-            {translations.split("; ").map((t: string, index: number) => {
-              return <li key={index}>- {t}</li>;
-            })}
+            {translations.split("; ").map((t: string, index: number) => addItalicToLi(t, index))}
           </ul>
         </DialogContent>
       </Dialog>

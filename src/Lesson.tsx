@@ -130,6 +130,7 @@ const Lesson: React.FC = () => {
   if (possibleAnswers.length) {
     task = sentences[random].task;
     translations = sentences[random].translation;
+
     if (Array.isArray(sentences[random].answer)) {
       answer = `${sentences[random].answer[0]
         .toString()
