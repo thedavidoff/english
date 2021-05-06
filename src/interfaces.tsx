@@ -22,7 +22,12 @@ export interface IHeader {
   status: null | boolean;
   stats: IStats;
 }
-export interface IAudioPlayerProps {
+export interface IAudioProps {
+  word: string;
+  lang: "us" | "uk",
+  className?: string
+}
+export interface IInfoTableProps {
   task: string;
   transcriptions: ITranscriptions;
   translations: string;

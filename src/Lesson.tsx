@@ -22,7 +22,7 @@ import {
 } from "./interfaces";
 import PossibleAnswersBlock from "./PossibleAnswersBlock";
 import Header from "./Header";
-import AudioPlayer from "./AudioPlayer";
+import InfoTable from "./InfoTable";
 import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles({
@@ -220,80 +220,81 @@ const Lesson: React.FC = () => {
   };
 
   return (
-<>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>{`Lesson ${lessonPath} - | English App`}</title>
-      <link rel="canonical" href={`/${lessonPath}`} />
-    </Helmet>
-    <Container className={classes.container}>
-      <Header stats={stats} status={status} />
-      <div className={classes.task}>
-        {task
-          ? `${task} (${translations
-              .split("; ")
-              .slice(0, 2)
-              .join(", ")
-              .toString()})`
-          : <CircularProgress color="inherit" />}
-      </div>
-      <div className={classes.result}>{result.join(" ")}</div>
-      {task ? (
-        <AudioPlayer
-          task={task}
-          transcriptions={transcriptions[random]}
-          translations={translations}
-        />
-      ) : null}
-      <div className={classes.correctAnswer}>
-        {result.length ? (
-          <>
-            <div className={classes.deleteButton} onClick={handleDelete}>
-              {status === null ? (
-                <HighlightOffIcon
-                  className={`${classes.smallStatusIcon} ${classes.iconOfWrongStatus}`}
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{`Lesson ${lessonPath} - | English App`}</title>
+        <link rel="canonical" href={`/${lessonPath}`} />
+      </Helmet>
+      <Container className={classes.container}>
+        <Header stats={stats} status={status} />
+        <div className={classes.task}>
+          {task
+            ? `${task} (${translations
+                .split("; ")
+                .slice(0, 2)
+                .join(", ")
+                .toString()})`
+            : <CircularProgress color="inherit" />}
+        </div>
+        <div className={classes.result}>{result.join(" ")}</div>
+        {task ? (
+          <InfoTable
+            task={task}
+            transcriptions={transcriptions[random]}
+            translations={translations}
+          />
+        ) : null}
+
+        <div className={classes.correctAnswer}>
+          {result.length ? (
+            <>
+              <div className={classes.deleteButton} onClick={handleDelete}>
+                {status === null ? (
+                  <HighlightOffIcon
+                    className={`${classes.smallStatusIcon} ${classes.iconOfWrongStatus}`}
+                  />
+                ) : null}
+              </div>
+              <Result status={status} answer={answer} />
+            </>
+          ) : null}
+        </div>
+        <TableContainer
+          component={Paper}
+          elevation={15}
+          className={classes.tableContainer}
+        >
+          <Table className={classes.table}>
+            <TableBody>
+              {possibleAnswers[random] ? (
+                <PossibleAnswersBlock
+                  possibleAnswers={possibleAnswers[random]}
+                  ids={ids}
+                  handleClick={handleClick}
                 />
               ) : null}
+            </TableBody>
+          </Table>
+          {status !== null ? (
+            <div
+              className={classes.status}
+              onClick={!status ? handleClear : undefined}
+            >
+              {status ? (
+                <CheckCircleOutlineOutlinedIcon
+                  className={`${classes.bigStatusIcon} ${classes.iconOfCorrectStatus}`}
+                />
+              ) : (
+                <HighlightOffIcon
+                  className={`${classes.bigStatusIcon} ${classes.iconOfWrongStatus}`}
+                />
+              )}
             </div>
-            <Result status={status} answer={answer} />
-          </>
-        ) : null}
-      </div>
-      <TableContainer
-        component={Paper}
-        elevation={15}
-        className={classes.tableContainer}
-      >
-        <Table className={classes.table}>
-          <TableBody>
-            {possibleAnswers[random] ? (
-              <PossibleAnswersBlock
-                possibleAnswers={possibleAnswers[random]}
-                ids={ids}
-                handleClick={handleClick}
-              />
-            ) : null}
-          </TableBody>
-        </Table>
-        {status !== null ? (
-          <div
-            className={classes.status}
-            onClick={!status ? handleClear : undefined}
-          >
-            {status ? (
-              <CheckCircleOutlineOutlinedIcon
-                className={`${classes.bigStatusIcon} ${classes.iconOfCorrectStatus}`}
-              />
-            ) : (
-              <HighlightOffIcon
-                className={`${classes.bigStatusIcon} ${classes.iconOfWrongStatus}`}
-              />
-            )}
-          </div>
-        ) : null}
-      </TableContainer>
-    </Container>
-  </>
+          ) : null}
+        </TableContainer>
+      </Container>
+    </>
   );
 };
 

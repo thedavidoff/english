@@ -8,7 +8,7 @@ import {
   DialogContent,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { IInfoModalProps } from "./interfaces";
+import {IInfoModalProps} from "./interfaces";
 import InfoSVG from "./images/InfoSVG";
 import {addItalicToLi} from "./utils";
 
@@ -42,10 +42,10 @@ const useStyles = makeStyles(() =>
 );
 
 const InfoModal: React.FC<IInfoModalProps> = ({
-  word,
-  transcriptions,
-  translations,
-}) => {
+    word,
+    transcriptions,
+    translations,
+  }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -56,12 +56,12 @@ const InfoModal: React.FC<IInfoModalProps> = ({
 
   return (
     <>
-      <InfoSVG onClick={handleOpen} />
+      <InfoSVG onClick={handleOpen}/>
       <Dialog
         open={open}
         onClose={handleClose}
         scroll="body"
-        PaperProps={{ classes: { root: classes.infoModal } }}
+        PaperProps={{classes: {root: classes.infoModal}}}
         aria-labelledby="info-modal-title"
         aria-describedby="info-modal--description"
       >
@@ -70,7 +70,7 @@ const InfoModal: React.FC<IInfoModalProps> = ({
           className={classes.infoModalCloseButton}
           onClick={handleClose}
         >
-          <CloseIcon />
+          <CloseIcon/>
         </IconButton>
         <DialogTitle id="info-modal-title">{word}</DialogTitle>
         <DialogContent id="info-modal-description" ref={nodeRef} tabIndex={-1}>
@@ -82,7 +82,7 @@ const InfoModal: React.FC<IInfoModalProps> = ({
               <i>брит.</i> <span>| {transcriptions[word][1]} |</span>
             </p>
           ) : null}
-          <hr />
+          <hr/>
           <ul className={classes.infoModalTranslationsList}>
             {translations.split("; ").map((t: string, index: number) => addItalicToLi(t, index))}
           </ul>
