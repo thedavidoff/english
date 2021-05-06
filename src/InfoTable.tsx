@@ -38,16 +38,15 @@ const InfoTable: React.FC<IInfoTableProps> = React.memo(
     const classes = useStyles();
 
     const slashPos: number = task.indexOf("/");
-    const spacePos: number = task.indexOf(" ");
     let firstWord: string = "";
     let secondWord: string = "";
 
     if (slashPos !== -1) {
       // When there is a slash. For example: "do/does (делать, поступать)"
       firstWord = task.slice(0, slashPos);
-      secondWord = task.slice(slashPos + 1, spacePos);
+      secondWord = task.slice(slashPos + 1);
     } else {
-      firstWord = task.split(" ")[0];
+      firstWord = task;
     }
 
     return (
@@ -59,12 +58,12 @@ const InfoTable: React.FC<IInfoTableProps> = React.memo(
             </TableCell>
             <TableCell className={classes.infoTableRightCell}>
               <Audio
-                word={task.split(" ")[0]}
+                word={firstWord}
                 lang="us"
                 className={classes.infoTableImg}
               />
               <Audio
-                word={task.split(" ")[0]}
+                word={firstWord}
                 lang="uk"
                 className={classes.infoTableImg}
               />
@@ -83,17 +82,17 @@ const InfoTable: React.FC<IInfoTableProps> = React.memo(
                 </TableCell>
                 <TableCell className={classes.infoTableRightCell}>
                   <Audio
-                    word={task.split(" ")[0]}
+                    word={secondWord}
                     lang="us"
                     className={classes.infoTableImg}
                   />
                   <Audio
-                    word={task.split(" ")[0]}
+                    word={secondWord}
                     lang="uk"
                     className={classes.infoTableImg}
                   />
                   <InfoModal
-                    word={firstWord}
+                    word={secondWord}
                     transcriptions={transcriptions}
                     translations={translations}
                   />
