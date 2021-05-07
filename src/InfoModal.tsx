@@ -8,13 +8,15 @@ import {
   DialogContent,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import {IInfoModalProps} from "./interfaces";
+import { IInfoModalProps } from "./interfaces";
 import InfoSVG from "./images/InfoSVG";
-import {addItalicToLi} from "./utils";
+import { addItalicToLi } from "./utils";
+import Audio from "./Audio";
 
 const useStyles = makeStyles(() =>
   createStyles({
     infoModal: {
+      minWidth: 225,
       borderRadius: 10,
     },
     infoModalCloseButton: {
@@ -24,6 +26,14 @@ const useStyles = makeStyles(() =>
       "&:hover": {
         color: "#f00",
       },
+    },
+    infoModalDialogContent: {
+      padding: "8px 24px 24px 24px"
+    },
+    infoModalTranscriptionString: {
+      display: "flex",
+      justifyContent: "space-evenly",
+      margin: "10px 0"
     },
     infoModalTranslationsList: {
       margin: 0,
@@ -35,17 +45,17 @@ const useStyles = makeStyles(() =>
       },
       "& i": {
         fontSize: 12,
-        color: "#909090"
-      }
+        color: "#909090",
+      },
     },
   })
 );
 
 const InfoModal: React.FC<IInfoModalProps> = ({
-    word,
-    transcriptions,
-    translations,
-  }) => {
+  word,
+  transcriptions,
+  translations,
+}) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -54,37 +64,43 @@ const InfoModal: React.FC<IInfoModalProps> = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log("InfoModal");
+
   return (
     <>
-      <InfoSVG onClick={handleOpen}/>
+      <InfoSVG onClick={handleOpen} />
       <Dialog
         open={open}
         onClose={handleClose}
         scroll="body"
-        PaperProps={{classes: {root: classes.infoModal}}}
+        PaperProps={{ classes: { root: classes.infoModal } }}
         aria-labelledby="info-modal-title"
-        aria-describedby="info-modal--description"
+        aria-describedby="info-modal-description"
       >
         <IconButton
           aria-label="close"
           className={classes.infoModalCloseButton}
           onClick={handleClose}
         >
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
         <DialogTitle id="info-modal-title">{word}</DialogTitle>
-        <DialogContent id="info-modal-description" ref={nodeRef} tabIndex={-1}>
-          <p>
-            <i>амер.</i> <span>| {transcriptions[word][0]} |</span>
-          </p>
+        <DialogContent className={classes.infoModalDialogContent} id="info-modal-description" ref={nodeRef} tabIndex={-1}>
+          <div className={classes.infoModalTranscriptionString}>
+            <i>амер.</i> <span>| {transcriptions[word][0]} | </span>
+            <Audio word={word} lang="us" />
+          </div>
           {transcriptions[word][1] ? (
-            <p>
-              <i>брит.</i> <span>| {transcriptions[word][1]} |</span>
-            </p>
+            <div className={classes.infoModalTranscriptionString}>
+              <i>брит.</i> <span>| {transcriptions[word][1]} | </span>
+              <Audio word={word} lang="uk" />
+            </div>
           ) : null}
-          <hr/>
+          <hr />
           <ul className={classes.infoModalTranslationsList}>
-            {translations.split("; ").map((t: string, index: number) => addItalicToLi(t, index))}
+            {translations
+              .split("; ")
+              .map((t: string, index: number) => addItalicToLi(t, index))}
           </ul>
         </DialogContent>
       </Dialog>

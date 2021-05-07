@@ -6,9 +6,11 @@ import UK from "./sounds/uk";
 import USSVG from "./images/USSVG";
 import UKSVG from "./images/UKSVG";
 
-const Audio: React.FC<IAudioProps> = ({ word, lang, ...props }) => {
+const Audio: React.FC<IAudioProps> = React.memo(({ word, lang, ...props }) => {
   const [playUS]: any = useSound(US[word]);
   const [playUK]: any = useSound(UK[word]);
+
+  console.log("Audio");
 
   switch (lang) {
     case "us":
@@ -30,6 +32,6 @@ const Audio: React.FC<IAudioProps> = ({ word, lang, ...props }) => {
     default:
       return null;
   }
-};
+});
 
 export default Audio;
